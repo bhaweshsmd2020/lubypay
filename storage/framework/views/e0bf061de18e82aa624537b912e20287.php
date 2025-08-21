@@ -1,0 +1,12 @@
+<script type="text/javascript">
+
+    function formatNumberToPrefDecimal(num = 0)
+    {
+        let decimal_format = '<?php echo e($preference['decimal_format_amount']); ?>';
+        num = ((Math.abs(num)).toFixed(decimal_format))
+        return num;
+
+        // num = Math.sign(num)*((Math.abs(num)).toFixed(decimal_format))  // removes zero after decimals - example - 1.220000, then it will show 1.22 - removes trailing zeros
+    }
+
+</script><?php /**PATH /home/lubypay/public_html/accounts/resources/views/common/format_number_to_pref_decimal.blade.php ENDPATH**/ ?>

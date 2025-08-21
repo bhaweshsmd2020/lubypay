@@ -1,0 +1,81 @@
+@extends('admin.layouts.master')
+
+@section('title', 'Dhiraagu Payments')
+
+@section('head_style') 
+    <!-- dataTables -->
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/backend/DataTables_latest/DataTables-1.10.18/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/backend/DataTables_latest/Responsive-2.2.2/css/responsive.dataTables.min.css') }}">
+@endsection
+
+@section('page_content')
+    <!-- Main content -->
+    <div class="row">
+        
+        <div class="col-md-12">
+            <div class="box box_info"> 
+                  <div class="box-header">
+                    <h3 class="box-title">Dhiraagu Payments List</h3>
+
+                    @if(Common::has_permission(\Auth::guard('admin')->user()->id, 'add_user'))
+                      <!--<div style="float:right;"><a class="btn btn-success" href="{{ url('admin/utility/bill_payment') }}"><span class="fa fa-plus"> &nbsp;</span>Create Bill Payment</a></div>-->
+                    @endif
+                  </div>
+                  <hr>
+                  <div class="box-body table-responsive">
+                     <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>S. No</th>
+                                <th>Customer Name</th>
+                                <th>Customer Number</th>
+                                <th>Transaction ID</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date & Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php
+                             $num = 1;
+                            @endphp
+                            @foreach($details as $value)
+                            <tr>
+                                <td>{{$num}}</td>
+                                <td>{{App\Models\User::find($value->customer_id)->first_name}}</td>
+                                <td>{{$value->reload_destinationNumber}}</td>
+                                 <td>{{$value->reload_transaction_id}}</td>
+                                <td>{{$value->reload_amount}}</td>
+                               @if($value->reload_transactionStatus == 1)
+                                <td>Success</td> 
+                                @else
+                                 <td>Failed</td> 
+                                 @endif
+                              <td>{{$value->created_at}}</td>
+                            </tr>
+                            @php
+                             $num++;
+                            @endphp
+                            @endforeach
+                             </tbody>
+                      
+                    </table>
+                  </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@push('extra_body_scripts')
+
+<!-- jquery.dataTables js -->
+<script src="{{ asset('public/backend/DataTables_latest/DataTables-1.10.18/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/backend/DataTables_latest/Responsive-2.2.2/js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
+<script>
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>
+
+@endpush
