@@ -12,10 +12,10 @@ Route::group(['middleware' => ['no_auth:admin', 'locale']], function ()
         return view('admin.auth.login');
     })->name('admin');
 
-    Route::post('adminlog', 'AdminController@authenticate');
-    Route::match(['GET', 'POST'], 'forget-password', 'AdminController@forgetPassword');
-    Route::get('password/resets/{token}', 'AdminController@verifyToken');
-    Route::post('confirm-password', 'AdminController@confirmNewPassword');
+    Route::post('adminlog', 'AuthController@authenticate');
+    Route::match(['GET', 'POST'], 'forget-password', 'AuthController@forgetPassword');
+    Route::get('password/resets/{token}', 'AuthController@verifyToken');
+    Route::post('confirm-password', 'AuthController@confirmNewPassword');
 });
 
 // Authenticated Admin
@@ -29,6 +29,18 @@ Route::group(['middleware' => ['guest:admin', 'locale']], function ()
         (new Common())->one_time_message('success',__('Cache successfully cleared.'));
         return back();
     })->name('clear.cache');
+
+    Route::post('submit-fa', 'AuthController@submitfa'); 
+    Route::get('faverify', 'AuthController@faverify')->name('faverify');  
+    
+    // Profile
+    Route::get('profile', 'ProfileController@profile');
+    Route::post('update-profile/{id}', 'ProfileController@profileUpdate');
+    Route::get('change-password', 'ProfileController@changePassword');
+    Route::post('update-password', 'ProfileController@updatePassword');
+    Route::post('2fa', 'ProfileController@submit2fa');
+    Route::post('check-password', 'ProfileController@passwordCheck');
+    Route::get('adminlogout', 'ProfileController@logout')->name('adminlogout');
     
     // Notification
     Route::post('notifications/update/{id}', 'NotificationController@update');
@@ -198,16 +210,13 @@ Route::group(['middleware' => ['guest:admin', 'locale']], function ()
     Route::post('change-lang', 'DashboardController@switchLanguage');
     Route::get('crypto/preference-disabled', 'DashboardController@adminCryptoPreferenceDisabled');
     
-    // Admin
-    Route::get('faverify', 'AdminController@faverify')->name('faverify');
-    Route::post('submit-fa', 'AdminController@submitfa');
-    Route::get('adminlogout', 'AdminController@logout')->name('adminlogout');
-    Route::get('profile', 'AdminController@profile');
+    // Admin    
+    Route::get('admins', 'AdminController@index');
+    Route::get('add-admin', 'AdminController@add');
+    Route::post('store-admin', 'AdminController@store');
+    Route::get('edit-admin/{id}', 'AdminController@edit');
     Route::post('update-admin/{id}', 'AdminController@update');
-    Route::get('change-password', 'AdminController@changePassword');
-    Route::post('change-password', 'AdminController@updatePassword');
-    Route::post('2fa', 'AdminController@submit2fa');
-    Route::post('check-password', 'AdminController@passwordCheck');
+    Route::get('delete-admin/{id}', 'AdminController@delete');    
     
     // Reports
     Route::get('report', 'ReportController@index');
@@ -264,12 +273,6 @@ Route::group(['middleware' => ['guest:admin', 'locale']], function ()
     Route::get('users/wallets/{id}', 'UserController@eachUserWallet');
     Route::get('users/tickets/{id}', 'UserController@eachUserTicket');
     Route::get('users/disputes/{id}', 'UserController@eachUserDispute');
-    Route::get('admin_users', 'UserController@adminList')->middleware(['permission:view_admins']);
-    Route::get('admin-user/create', 'UserController@adminCreate')->middleware(['permission:add_admin']);
-    Route::post('admin-users/store', 'UserController@adminStore');
-    Route::get('admin-user/edit/{id}', 'UserController@adminEdit')->middleware(['permission:edit_admin']);
-    Route::post('admin-users/update', 'UserController@adminUpdate');
-    Route::get('admin-user/delete/{id}', 'UserController@adminDestroy')->middleware(['permission:delete_admin']);
     Route::get('approve-device/{id}', 'UserController@approve_device');
     Route::get('unlink-device', 'UserController@unlink_device');
     Route::get('users/activity-logs/{id}', 'UserController@activity_logs');
@@ -509,8 +512,8 @@ Route::group(['middleware' => ['guest:admin', 'locale']], function ()
     Route::get('settings/currency/get-active-blockio-crypto-currency-settings', 'CurrencyController@getActiveBlockIoCrytoCurrencySettings');
 
     // FeesLimit
-    Route::get('settings/feeslimit/{tab}/{id}', 'FeesLimitController@limitList')->middleware(['permission:edit_currency']);
-    Route::post('settings/get-feeslimit-details', 'FeesLimitController@getFesslimitDetails');
+    Route::get('settings/feeslimit/{tab}/{subs}/{id}', 'FeesLimitController@limitList')->middleware(['permission:edit_currency']);
+    Route::post('settings/get-feeslimit-details', 'FeesLimitController@getFesslimitDetails')->name('settings.feesLimitDetails');
     Route::post('settings/feeslimit/update-deposit-limit', 'FeesLimitController@updateDepositLimit');
     Route::post('settings/get-specific-currency-details', 'FeesLimitController@getSpecificCurrencyDetails');
 
@@ -674,6 +677,38 @@ Route::group(['middleware' => ['guest:admin', 'locale']], function ()
     Route::post('update-survey/{id}', 'SurveyController@update');
     Route::get('delete-survey/{id}', 'SurveyController@delete');
     Route::get('remind-survey/{id}', 'SurveyController@remind');
+
+    // Subscription
+    Route::get('subscriptions', 'SubscriptionController@index');
+    Route::get('add-subscription', 'SubscriptionController@add');
+    Route::post('store-subscription', 'SubscriptionController@store');
+    Route::get('edit-subscription/{id}', 'SubscriptionController@edit');
+    Route::post('update-subscription/{id}', 'SubscriptionController@update');
+    Route::get('delete-subscription/{id}', 'SubscriptionController@delete');
+
+    // PaymentMethod
+    Route::get('paymentmethods', 'PaymentMethodController@index');
+    Route::get('add-paymentmethod', 'PaymentMethodController@add');
+    Route::post('store-paymentmethod', 'PaymentMethodController@store');
+    Route::get('edit-paymentmethod/{id}', 'PaymentMethodController@edit');
+    Route::post('update-paymentmethod/{id}', 'PaymentMethodController@update');
+    Route::get('delete-paymentmethod/{id}', 'PaymentMethodController@delete');
+
+    // TransactionType
+    Route::get('transactiontypes', 'TransactionTypeController@index');
+    Route::get('add-transactiontype', 'TransactionTypeController@add');
+    Route::post('store-transactiontype', 'TransactionTypeController@store');
+    Route::get('edit-transactiontype/{id}', 'TransactionTypeController@edit');
+    Route::post('update-transactiontype/{id}', 'TransactionTypeController@update');
+    Route::get('delete-transactiontype/{id}', 'TransactionTypeController@delete');
+
+    // AmbassadorCodes
+    Route::get('ambassador-codes', 'AmbassadorCodeController@index');
+    Route::get('add-ambassador-code', 'AmbassadorCodeController@add');
+    Route::post('store-ambassador-code', 'AmbassadorCodeController@store');
+    Route::get('edit-ambassador-code/{id}', 'AmbassadorCodeController@edit');
+    Route::post('update-ambassador-code/{id}', 'AmbassadorCodeController@update');
+    Route::get('delete-ambassador-code/{id}', 'AmbassadorCodeController@delete');
 
     // Check enabled currencies in preference
     Route::group(['middleware' => ['check-enabled-currencies-preference']], function ()

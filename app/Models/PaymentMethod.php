@@ -10,8 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     protected $table    = 'payment_methods';
-    protected $fillable = ['name', 'status'];
-    public $timestamps  = false;
+    protected $fillable = ['name', 'description', 'slug', 'has_permission', 'icon', 'status'];
 
     public function fee()
     {

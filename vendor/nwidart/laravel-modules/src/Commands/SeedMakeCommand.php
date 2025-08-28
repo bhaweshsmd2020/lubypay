@@ -12,25 +12,31 @@ use Symfony\Component\Console\Input\InputOption;
 
 class SeedMakeCommand extends GeneratorCommand
 {
-    use CanClearModulesCache;
     use ModuleCommandTrait;
+    use CanClearModulesCache;
 
     protected $argumentName = 'name';
 
     /**
      * The console command name.
+     *
+     * @var string
      */
     protected $name = 'module:make-seed';
 
     /**
      * The console command description.
+     *
+     * @var string
      */
     protected $description = 'Generate new seeder for the specified module.';
 
     /**
      * Get the console command arguments.
+     *
+     * @return array
      */
-    protected function getArguments(): array
+    protected function getArguments()
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of seeder will be created.'],
@@ -40,8 +46,10 @@ class SeedMakeCommand extends GeneratorCommand
 
     /**
      * Get the console command options.
+     *
+     * @return array
      */
-    protected function getOptions(): array
+    protected function getOptions()
     {
         return [
             [
@@ -53,7 +61,10 @@ class SeedMakeCommand extends GeneratorCommand
         ];
     }
 
-    protected function getTemplateContents(): mixed
+    /**
+     * @return mixed
+     */
+    protected function getTemplateContents()
     {
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
 
@@ -65,7 +76,10 @@ class SeedMakeCommand extends GeneratorCommand
         ]))->render();
     }
 
-    protected function getDestinationFilePath(): mixed
+    /**
+     * @return mixed
+     */
+    protected function getDestinationFilePath()
     {
         $this->clearCache();
 
@@ -77,23 +91,21 @@ class SeedMakeCommand extends GeneratorCommand
     }
 
     /**
-     * Get the seeder name.
+     * Get seeder name.
+     *
+     * @return string
      */
-    private function getSeederName(): string
+    private function getSeederName()
     {
-        $string = $this->argument('name');
-        $string .= $this->option('master') ? 'Database' : '';
-        $suffix = 'Seeder';
+        $end = $this->option('master') ? 'DatabaseSeeder' : 'TableSeeder';
 
-        if (strpos($string, $suffix) === false) {
-            $string .= $suffix;
-        }
-
-        return Str::studly($string);
+        return Str::studly($this->argument('name')) . $end;
     }
 
     /**
      * Get default namespace.
+     *
+     * @return string
      */
     public function getDefaultNamespace(): string
     {

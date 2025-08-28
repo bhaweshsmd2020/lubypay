@@ -249,6 +249,7 @@ class Sheet
 
         $calculatesFormulas = $import instanceof WithCalculatedFormulas;
         $formatData         = $import instanceof WithFormatData;
+        $endColumn          = $import instanceof WithColumnLimit ? $import->endColumn() : null;
 
         if ($import instanceof WithMappedCells) {
             app(MappedReader::class)->map($import, $this->worksheet);
@@ -291,11 +292,9 @@ class Sheet
                     $sheetRow->setPreparationCallback($preparationCallback);
                 }
 
-                $rowArray                    = $sheetRow->toArray(null, $import instanceof WithCalculatedFormulas, $import instanceof WithFormatData, $endColumn);
-                $rowIsEmptyAccordingToImport = $import instanceof SkipsEmptyRows && method_exists($import, 'isEmptyWhen') && $import->isEmptyWhen($rowArray);
-                if (!$import instanceof SkipsEmptyRows || ($import instanceof SkipsEmptyRows && (!$rowIsEmptyAccordingToImport && !$sheetRow->isEmpty($calculatesFormulas)))) {
+                if (!$import instanceof SkipsEmptyRows || ($import instanceof SkipsEmptyRows && !$sheetRow->isEmpty($calculatesFormulas))) {
                     if ($import instanceof WithValidation) {
-                        $toValidate = [$sheetRow->getIndex() => $rowArray];
+                        $toValidate = [$sheetRow->getIndex() => $sheetRow->toArray(null, $import instanceof WithCalculatedFormulas, $import instanceof WithFormatData, $endColumn)];
 
                         try {
                             app(RowValidator::class)->validate($toValidate, $import);
@@ -661,7 +660,7 @@ class Sheet
     }
 
     /**
-     * @param  $sheetImport
+     * @param $sheetImport
      * @return int
      */
     public function getStartRow($sheetImport): int

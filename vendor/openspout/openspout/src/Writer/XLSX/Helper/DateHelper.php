@@ -48,7 +48,8 @@ final class DateHelper
             + $day
             + 1721119
             - $myexcelBaseDate
-            + $excel1900isLeapYear;
+            + $excel1900isLeapYear
+        ;
 
         $excelTime = (($hours * 3600) + ($minutes * 60) + $seconds) / 86400;
 

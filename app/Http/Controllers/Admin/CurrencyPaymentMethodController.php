@@ -30,52 +30,11 @@ class CurrencyPaymentMethodController extends Controller
     {
         $data['menu']     = 'configurations';
         $data['sub_menu'] = 'currency';
-
-        $data['list_menu'] = $tab;
-
-        if ($tab == 'stripe')
-        {
-            $tab = 'Stripe';
-        }
-        elseif ($tab == 'paypal')
-        {
-            $tab = 'Paypal';
-        }
-        elseif ($tab == 'twoCheckout')
-        {
-            $tab = '2Checkout';
-        }
-        elseif ($tab == 'payUMoney')
-        {
-            $tab = 'PayUMoney';
-        }
-        elseif ($tab == 'coinPayments')
-        {
-            $tab = 'CoinPayments';
-        }
-        elseif ($tab == 'mts')
-        {
-            $tab = 'Mts';
-        }
-        elseif ($tab == 'payeer')
-        {
-            $tab = 'Payeer';
-        }
-        elseif ($tab == 'bank')
-        {
-            $tab = 'bank';
-        }
-        elseif ($tab == 'braintree')
-        {
-            $tab = 'braintree';
-        }
-        elseif ($tab == 'plaid')
-        {
-            $tab = 'Plaid';
-        }
+        $data['list_menu'] = $tab;       
         
-        $paymentMethod                 = PaymentMethod::where(['name' => ucfirst($tab)])->first(['id']);
+        $paymentMethod                 = PaymentMethod::where('slug', $tab)->first();
         $data['paymentMethod']         = $paymentMethod->id;
+        $data['paymentMethodList']     = PaymentMethod::where('status', 'Active')->get();
         $data['currencyPaymentMethod'] = CurrencyPaymentMethod::where(['method_id' => $paymentMethod->id, 'currency_id' => $id])->first();
         $data['currency']              = $this->currency->getCurrency(['id' => $id], ['id','name']);
         $data['currencyList']          = $this->currency->getAllCurrencies(['status' => 'Active', 'type' => 'fiat'], ['id','name']);
@@ -179,10 +138,10 @@ class CurrencyPaymentMethodController extends Controller
                     $currencyPaymentMethod->activated_for = json_encode(['' => '']);
                 }
             }
-            elseif (!empty($request->plaid))
+            elseif (!empty($request->ach))
             {
-                $currencyPaymentMethod->method_data = json_encode($request->plaid);
-                if (isset($request->plaid_status) && $request->plaid_status == 'Active')
+                $currencyPaymentMethod->method_data = json_encode($request->ach);
+                if (isset($request->ach_status) && $request->ach_status == 'Active')
                 {
                     $currencyPaymentMethod->activated_for = json_encode(['deposit' => '']);
                 }
@@ -284,10 +243,10 @@ class CurrencyPaymentMethodController extends Controller
                     $currencyPaymentMethod->activated_for = json_encode(['' => '']);
                 }
             }
-            elseif (!empty($request->plaid))
+            elseif (!empty($request->ach))
             {
-                $currencyPaymentMethod->method_data = json_encode($request->plaid);
-                if (isset($request->plaid_status) && $request->plaid_status == 'Active')
+                $currencyPaymentMethod->method_data = json_encode($request->ach);
+                if (isset($request->ach_status) && $request->ach_status == 'Active')
                 {
                     $currencyPaymentMethod->activated_for = json_encode(['deposit' => '']);
                 }

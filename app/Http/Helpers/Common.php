@@ -1124,13 +1124,13 @@ class Common
     
     public static function unread_revenues($table)
     {
-        $count = DB::table($table)->where('read_revenue_status', '0')->whereIn('transaction_type_id', [Deposit, Withdrawal, Transferred, Request_To, Payment_Received, Crypto_Sent, Recharge, Cable, Exchange_From, Exchange_To, 32])->count();
+        $count = DB::table($table)->where('read_revenue_status', '0')->whereIn('transaction_type_id', [1, 2, 3, 10, 12, 13, 15, 27, 5, 6, 32])->count();
         return $count;
     }
     
     public static function unread_report($table)
     {
-        $count = DB::table($table)->where('read_report_status', '0')->whereIn('transaction_type_id', [Deposit, Withdrawal, Transferred, Request_To, Payment_Received, Crypto_Sent, Recharge, Cable, Exchange_From, Exchange_To, 32])->count();
+        $count = DB::table($table)->where('read_report_status', '0')->whereIn('transaction_type_id', [1, 2, 3, 10, 12, 13, 15, 27, 5, 6, 32])->count();
         return $count;
     }
     

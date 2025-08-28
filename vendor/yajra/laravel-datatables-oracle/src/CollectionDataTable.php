@@ -334,10 +334,10 @@ class CollectionDataTable extends DataTableAbstract
     /**
      * Resolve callback parameter instance.
      *
-     * @return array<int|string, mixed>
+     * @return static
      */
-    protected function resolveCallbackParameter(): array
+    protected function resolveCallbackParameter(): self
     {
-        return [$this, false];
+        return $this;
     }
 }

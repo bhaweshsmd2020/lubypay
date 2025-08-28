@@ -6,7 +6,16 @@ use Illuminate\Support\Arr;
 
 trait HasTable
 {
-    protected ?string $theadClass = null;
+    /**
+     * Retrieves HTML table attribute value.
+     *
+     * @param  string  $attribute
+     * @return string
+     */
+    public function getTableAttribute(string $attribute): string
+    {
+        return $this->tableAttributes[$attribute] ?? '';
+    }
 
     /**
      * Get table computed table attributes.
@@ -27,6 +36,16 @@ trait HasTable
     public function setTableId(string $id): static
     {
         return $this->setTableAttribute('id', $id);
+    }
+
+    /**
+     * Get HTML table "id" attribute.
+     *
+     * @return string
+     */
+    public function getTableId(): string
+    {
+        return $this->getTableAttribute('id');
     }
 
     /**
@@ -63,27 +82,6 @@ trait HasTable
     }
 
     /**
-     * Get HTML table "id" attribute.
-     *
-     * @return string
-     */
-    public function getTableId(): string
-    {
-        return $this->getTableAttribute('id');
-    }
-
-    /**
-     * Retrieves HTML table attribute value.
-     *
-     * @param  string  $attribute
-     * @return string
-     */
-    public function getTableAttribute(string $attribute): string
-    {
-        return $this->tableAttributes[$attribute] ?? '';
-    }
-
-    /**
      * Add class names to the "class" attribute of HTML table.
      *
      * @param  array|string  $class
@@ -98,19 +96,6 @@ trait HasTable
         $class = implode(' ', array_unique((array) $classes));
 
         return $this->setTableAttribute('class', $class);
-    }
-
-    /**
-     * Set table > thead class names.
-     *
-     * @param  string  $class
-     * @return $this
-     */
-    public function setTableHeadClass(string $class): static
-    {
-        $this->theadClass = " class=\"$class\"";
-
-        return $this;
     }
 
     /**

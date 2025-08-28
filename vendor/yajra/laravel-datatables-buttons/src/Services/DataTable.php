@@ -783,7 +783,6 @@ abstract class DataTable implements DataTableButtons
 
     /**
      * @return \Rap2hpoutre\FastExcel\FastExcel
-     *
      * @throws \Yajra\DataTables\Exceptions\Exception
      */
     protected function buildFastExcelFile(): FastExcel

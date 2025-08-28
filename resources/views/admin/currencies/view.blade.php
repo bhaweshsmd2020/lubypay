@@ -71,7 +71,7 @@
                                                 <a href="{{ url('admin/settings/delete_currency/' . encrypt($value->id))}}" class="label label-danger delete-warning"><i class="glyphicon glyphicon-trash"></i></a>&nbsp;
                                             @endif
                             
-                                            <a href="{{ url('admin/settings/feeslimit/deposit/' . $value->id) }}" class="label label-primary"><i class="glyphicon glyphicon-view">Fees</i></a>&nbsp;
+                                            <!-- <a href="{{ url('admin/settings/feeslimit/deposit/' . $value->id) }}" class="label label-primary"><i class="glyphicon glyphicon-view">Fees</i></a>&nbsp; -->
                             
                                             <a href="{{ url('admin/settings/payment-methods/stripe/' . $value->id) }}" class="label label-primary"><i class="glyphicon glyphicon-view">Payment-Methods</i></a>&nbsp;
                                         </td>

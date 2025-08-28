@@ -3,12 +3,13 @@
 namespace $NAMESPACE$;
 
 use Illuminate\View\Component;
-use Illuminate\View\View;
 
 class $CLASS$ extends Component
 {
     /**
      * Create a new component instance.
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -16,9 +17,11 @@ class $CLASS$ extends Component
     }
 
     /**
-     * Get the view/contents that represent the component.
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\View\View|string
      */
-    public function render(): View|string
+    public function render()
     {
         return view('$LOWER_NAME$::$COMPONENT_NAME$');
     }

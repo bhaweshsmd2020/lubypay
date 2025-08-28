@@ -1,10 +1,5 @@
 <?php
-/**
- * Created By: TechVillage.net
- * Start Date: 22-Jan-2018
- */
-$logo = getCompanyLogoWithoutSession();
-//dd($logo);
+    $logo = getCompanyLogoWithoutSession();
 ?>
 
 <!DOCTYPE html>

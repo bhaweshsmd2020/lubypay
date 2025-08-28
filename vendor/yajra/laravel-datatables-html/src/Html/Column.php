@@ -492,20 +492,6 @@ class Column extends Fluent
     }
 
     /**
-     * Set Callback function to render column for Print + Export
-     *
-     * @param  callable  $callback
-     * @return $this
-
-     */
-    public function exportRender(callable $callback): static
-    {
-        $this->attributes['exportRender'] = $callback;
-
-        return $this;
-    }
-
-    /**
      * Parse render attribute.
      *
      * @param  mixed  $value

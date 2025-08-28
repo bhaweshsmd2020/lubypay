@@ -41,7 +41,15 @@ class RefreshToken extends Model
      */
     protected $casts = [
         'revoked' => 'bool',
-        'expires_at' => 'datetime',
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'expires_at',
     ];
 
     /**

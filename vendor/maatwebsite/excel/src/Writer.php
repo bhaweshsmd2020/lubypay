@@ -166,7 +166,7 @@ class Writer
         );
 
         $writer->save(
-            $temporaryFile->getLocalPath()
+            $path = $temporaryFile->getLocalPath()
         );
 
         if ($temporaryFile instanceof RemoteTemporaryFile) {

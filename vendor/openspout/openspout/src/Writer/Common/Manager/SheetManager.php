@@ -26,7 +26,7 @@ final class SheetManager
     /** @var array<string, array<int, string>> Associative array [WORKBOOK_ID] => [[SHEET_INDEX] => [SHEET_NAME]] keeping track of sheets' name to enforce uniqueness per workbook */
     private static array $SHEETS_NAME_USED = [];
 
-    private readonly StringHelper $stringHelper;
+    private StringHelper $stringHelper;
 
     /**
      * SheetManager constructor.
