@@ -62,4 +62,9 @@ class Admin extends Model implements AuthenticatableContract, CanResetPasswordCo
     {
         return $this->hasOne(Bank::class, 'admin_id');
     }
+
+    public function ambassador()
+    {
+        return $this->hasOne(AbassadorCode::class,'created_for');
+    }
 }

@@ -26,8 +26,8 @@
     </li>
     
     @if(Common::has_permission(\Auth::guard('admin')->user()->id, 'view_admins'))
-        <li <?= $menu == 'admin_users_list' ? ' class="active"' : 'treeview'?>>
-            <a href="{{ url('admin/admin_users') }}">
+        <li <?= $menu == 'admin_list' ? ' class="active"' : 'treeview'?>>
+            <a href="{{ url('admin/admins') }}">
                 <i class="fa fa-user-md"></i><span>Administrators</span>
                 @if(Common::unread_count('admins') > 0)
                     <span class="label label-warning">{{ Common::unread_count('admins') }}</span>
@@ -380,8 +380,24 @@
                             <i class="fa fa-upload"></i><span >Push Notifications</span>
                         </a>
                     </li>
-                @endif
+                @endif                
                 
+                @if(Common::has_permission(\Auth::guard('admin')->user()->id, 'view_paymentmethods'))
+                    <li <?= isset($sub_menu) && $sub_menu == 'paymentmethods' ? ' class="active"' : ''?> >
+                        <a href="{{ url('admin/paymentmethods') }}">
+                            <i class="fa fa-money"></i><span>Payment Methods</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if(Common::has_permission(\Auth::guard('admin')->user()->id, 'view_transactiontypes'))
+                    <li <?= isset($sub_menu) && $sub_menu == 'transactiontypes' ? ' class="active"' : ''?> >
+                        <a href="{{ url('admin/transactiontypes') }}">
+                            <i class="fa fa-money"></i><span>Transaction Types</span>
+                        </a>
+                    </li>
+                @endif
+
                 @if(Common::has_permission(\Auth::guard('admin')->user()->id, 'view_currency'))
                     <li <?= isset($sub_menu) && $sub_menu == 'currency' ? ' class="active"' : ''?> >
                         <a href="{{ url('admin/settings/currency') }}">
@@ -605,4 +621,20 @@
             </a>
         </li>
     @endif
+
+    @if(Common::has_permission(\Auth::guard('admin')->user()->id, 'view_subscriptions'))
+        <li <?= $menu == 'subscriptions' ? ' class="active"' : 'treeview'?>>
+            <a href="{{ url('admin/subscriptions') }}">
+                <i class="fa fa-server"></i><span>Subscriptions</span>
+            </a>
+        </li>
+    @endif  
+    
+    @if(Common::has_permission(\Auth::guard('admin')->user()->id, 'view_ambassador_codes'))
+        <li <?= $menu == 'ambassadorcodes' ? ' class="active"' : 'treeview'?>>
+            <a href="{{ url('admin/ambassador-codes') }}">
+                <i class="fa fa-server"></i><span>Ambassador Codes</span>
+            </a>
+        </li>
+    @endif  
 </ul>

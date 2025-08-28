@@ -45,7 +45,7 @@
             <div class="row">
                 <div class="col-md-12">
                     
-                    <form action='{{ url("admin/change-password") }}' method="POST" class="form-horizontal" id="password_form" >
+                    <form action='{{ url("admin/update-password") }}' method="POST" class="form-horizontal" id="password_form" >
                         {!! csrf_field() !!}
         
                         <input type="hidden" value="{{$admin_id}}" name="id" id="id" />

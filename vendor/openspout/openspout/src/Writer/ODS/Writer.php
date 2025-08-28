@@ -19,7 +19,7 @@ final class Writer extends AbstractWriterMultiSheets
 {
     /** @var string Content-Type value for the header */
     protected static string $headerContentType = 'application/vnd.oasis.opendocument.spreadsheet';
-    private readonly Options $options;
+    private Options $options;
 
     public function __construct(?Options $options = null)
     {
@@ -35,7 +35,7 @@ final class Writer extends AbstractWriterMultiSheets
     {
         $workbook = new Workbook();
 
-        $fileSystemHelper = new FileSystemHelper($this->options->getTempFolder(), new ZipHelper(), $this->creator);
+        $fileSystemHelper = new FileSystemHelper($this->options->getTempFolder(), new ZipHelper());
         $fileSystemHelper->createBaseFilesAndFolders();
 
         $styleMerger = new StyleMerger();

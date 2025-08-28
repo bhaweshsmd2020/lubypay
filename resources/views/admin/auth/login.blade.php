@@ -1,10 +1,5 @@
 <?php
-/**
- * Created By: TechVillage.net
- * Start Date: 22-Jan-2018
- */
-$logo = getCompanyLogoWithoutSession();
-//dd($logo);
+    $logo = getCompanyLogoWithoutSession();
 ?>
 
 <!DOCTYPE html>
@@ -135,7 +130,7 @@ html, body {
                 Google+</a>
         </div> --}}
         <!-- /.social-auth-links -->
-        <a href="{{ url('admin/forget-password') }}" style="font-size: 13px;">I forgot my password</a><br>
+        <a href="{{ url('admin/forget-password') }}" style="font-size: 13px;">Forgot Password</a><br>
         {{-- <a href="javascript:void(0)" class="text-center">Register a new membership</a> --}}
     </div>
     <!-- /.login-box-body -->

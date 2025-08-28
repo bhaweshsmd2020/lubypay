@@ -12,7 +12,6 @@ class ConsoleServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        Commands\ChannelMakeCommand::class,
         Commands\CommandMakeCommand::class,
         Commands\ControllerMakeCommand::class,
         Commands\DisableCommand::class,
@@ -42,7 +41,6 @@ class ConsoleServiceProvider extends ServiceProvider
         Commands\MigrateStatusCommand::class,
         Commands\MigrationMakeCommand::class,
         Commands\ModelMakeCommand::class,
-        Commands\ObserverMakeCommand::class,
         Commands\ModelShowCommand::class,
         Commands\PublishCommand::class,
         Commands\PublishConfigurationCommand::class,

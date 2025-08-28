@@ -90,7 +90,7 @@ class SubscriptionService extends \Stripe\Service\AbstractService
      *
      * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
-     * @return \Stripe\Discount
+     * @return \Stripe\Subscription
      */
     public function deleteDiscount($id, $params = null, $opts = null)
     {

@@ -147,7 +147,10 @@ Method | Description
 
 ### Example
 
-[👉 View "**bnbAssetOffchain.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/bnbAssetOffchain.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **bnbAssetOffchain.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/bnbAssetOffchain.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -173,23 +176,27 @@ void (empty response body)
 
 ### Description
 
-Create a BNB-based asset
+> Create a BNB-based asset
 
-<h4>2 credits per API call.</h4>
+#### 2 credits per API call.
 
- Create a BNB-based asset in a virtual account. The asset must first be <a href="https://docs.bnbchain.org/docs/beaconchain/learn/BEP8" target="_blank">created and configured on BNB Beacon Chain blockhain</a>.
+Create a BNB-based asset in a virtual account. The asset must first be [created and configured on BNB Beacon Chain blockhain](https://docs.bnbchain.org/docs/beaconchain/learn/BEP8).
 
- This API call will create an internal virtual currency. You can create virtual accounts with off-chain support.
+This API call will create an internal virtual currency. You can create virtual accounts with off-chain support.
 
-[Back to top](#top)
+[Back to top](#top){: .btn .btn-purple }
 
+---
 
 
 ## `deployAlgoErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**deployAlgoErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployAlgoErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployAlgoErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployAlgoErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -215,19 +222,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployAlgoErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployAlgoErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**deployAlgoErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployAlgoErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployAlgoErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployAlgoErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -253,31 +264,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy an Algorand ERC-20-equivalent smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new Algorand ERC20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy an Algorand ERC-20-equivalent smart contract. This is a helper method, which is combination of [Register new Algorand ERC20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `deployAlgoErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**deployAlgoErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployAlgoErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployAlgoErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployAlgoErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -303,19 +316,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy an Algorand ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployAlgoErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployCeloErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**deployCeloErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployCeloErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -341,19 +358,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployCeloErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployCeloErc20OffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**deployCeloErc20OffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployCeloErc20OffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -379,19 +400,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployCeloErc20OffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployCeloErc20OffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**deployCeloErc20OffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployCeloErc20OffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -417,19 +442,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployCeloErc20OffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployCeloErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**deployCeloErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployCeloErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -455,31 +484,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy a Celo ERC-20-equivalent smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new Celo ERC-20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy a Celo ERC-20-equivalent smart contract. This is a helper method, which is combination of [Register new Celo ERC-20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `deployCeloErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**deployCeloErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployCeloErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -505,19 +536,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployCeloErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployCeloErc20OffchainPKXpub()`
 
 ### Example
 
-[👉 View "**deployCeloErc20OffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployCeloErc20OffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployCeloErc20OffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -543,19 +578,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Celo ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployCeloErc20OffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**deployErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -581,19 +620,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
+> Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployErc20OffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**deployErc20OffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployErc20OffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -619,19 +662,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
+> Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployErc20OffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**deployErc20OffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployErc20OffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -657,19 +704,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
+> Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**deployErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -695,31 +746,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
+> Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy an Ethereum ERC-20 smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new ERC20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy an Ethereum ERC-20 smart contract. This is a helper method, which is combination of [Register new ERC20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying an Ethereum ERC-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying an Ethereum ERC-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `deployErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**deployErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -745,19 +798,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
+> Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployErc20OffchainPKXpub()`
 
 ### Example
 
-[👉 View "**deployErc20OffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployErc20OffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployErc20OffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -783,19 +840,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
+> Deploy an Ethereum ERC-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployTrcOffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**deployTrcOffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployTrcOffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -821,19 +882,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
+> Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
 
-DeployTrcOffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployTrcOffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**deployTrcOffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployTrcOffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -859,19 +924,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
+> Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
 
-DeployTrcOffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployTrcOffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**deployTrcOffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployTrcOffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -897,19 +966,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
+> Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
 
-DeployTrcOffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployTrcOffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**deployTrcOffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployTrcOffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -935,31 +1008,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
+> Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
 
 **10 credits per API call**
 
- Deploy a TRON TRC-10 or TRC-20 smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/createtrc">Register new TRC-10/20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc20">Deploy blockchain TRC20</a> or <a href="https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc10">Deploy blockchain TRC10</a>.
+Deploy a TRON TRC-10 or TRC-20 smart contract. This is a helper method, which is combination of [Register new TRC-10/20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/createtrc) and [Deploy blockchain TRC20](https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc20) or [Deploy blockchain TRC10](https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc10).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `deployTrcOffchainPKAddress()`
 
 ### Example
 
-[👉 View "**deployTrcOffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployTrcOffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -985,19 +1060,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
+> Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
 
-DeployTrcOffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `deployTrcOffchainPKXpub()`
 
 ### Example
 
-[👉 View "**deployTrcOffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **deployTrcOffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/deployTrcOffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1023,19 +1102,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
+> Deploy a TRON TRC-10 or TRC-20 smart contract to the blockchain and a virtual account
 
-DeployTrcOffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `erc20()`
 
 ### Example
 
-[👉 View "**erc20.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/erc20.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **erc20.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/erc20.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1063,37 +1146,29 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Register a new ERC-20 or ERC-20-equivalent token in the virtual account
+> Register a new ERC-20 or ERC-20-equivalent token in the virtual account
 
-<h4>2 credits per API call.</h4>
+#### 2 credits per API call.
 
- This is the first step to create a new ERC-20 or ERC-20 equivalent token with some supply in a virtual account.
-
- 
-
- 
-
- This method only creates Tatum Private ledger virtual currency with predefined parameters. It will not generate any blockchain smart contract.
-
- The whole supply of token is stored in the customer's newly created account. Then it is possible to create new Tatum accounts with token name as account's currency.
-
- Newly created account is frozen until the specific smart contract address is linked with the Tatum virtual currency, representing the token.
-
- Order of the steps to create smart contract with Tatum private ledger support: 
-
-<ol> <li>Register token (this API) - creates a virtual currency within Tatum</li> <li><a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy smart contract</a> - create new smart contract on the blockchain</li> <li><a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/storetokenaddress">Store smart contract address</a> - link newly created smart contract address with Tatum virtual currency - this operation enables frozen account and enables ledger synchronization for Tatum accounts</li> </ol>
-
+This is the first step to create a new ERC-20 or ERC-20 equivalent token with some supply in a virtual account. This method only creates Tatum Private ledger virtual currency with predefined parameters. It will not generate any blockchain smart contract. The whole supply of token is stored in the customer's newly created account. Then it is possible to create new Tatum accounts with token name as account's currency. Newly created account is frozen until the specific smart contract address is linked with the Tatum virtual currency, representing the token. Order of the steps to create smart contract with Tatum private ledger support: 
+1. Register token (this API) - creates a virtual currency within Tatum
+2. [Deploy smart contract](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy) \- create new smart contract on the blockchain
+3. [Store smart contract address](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/storetokenaddress) \- link newly created smart contract address with Tatum virtual currency - this operation enables frozen account and enables ledger synchronization for Tatum accounts
  Blockchain address will be assigned to the virtual account as a deposit address. It can be defined via the address explicitly or by using xpub and derivationIndex.
 
-[Back to top](#top)
+[Back to top](#top){: .btn .btn-purple }
 
+---
 
 
 ## `erc20Address()`
 
 ### Example
 
-[👉 View "**erc20Address.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/erc20Address.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **erc20Address.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/erc20Address.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1121,19 +1196,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Register a new ERC-20 or ERC-20-equivalent token in the virtual account
+> Register a new ERC-20 or ERC-20-equivalent token in the virtual account
 
-Erc20Address operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offBscDeployErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**offBscDeployErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offBscDeployErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1159,19 +1238,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
+> Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offBscDeployErc20OffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**offBscDeployErc20OffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offBscDeployErc20OffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1197,19 +1280,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
+> Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offBscDeployErc20OffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**offBscDeployErc20OffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offBscDeployErc20OffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1235,19 +1322,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
+> Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offBscDeployErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**offBscDeployErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offBscDeployErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1273,31 +1364,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
+> Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy a BNB Smart Chain BEP-20 smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new BEP20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy a BNB Smart Chain BEP-20 smart contract. This is a helper method, which is combination of [Register new BEP20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `offBscDeployErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**offBscDeployErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offBscDeployErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1323,19 +1416,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
+> Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offBscDeployErc20OffchainPKXpub()`
 
 ### Example
 
-[👉 View "**offBscDeployErc20OffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offBscDeployErc20OffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offBscDeployErc20OffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1361,19 +1458,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
+> Deploy a BNB Smart Chain BEP-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offEglTransferEth()`
 
 ### Example
 
-[👉 View "**offEglTransferEth.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offEglTransferEth.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offEglTransferEth.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offEglTransferEth.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1399,31 +1500,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send EGLD from a virtual account to the blockchain
+> Send EGLD from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send EGLD from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send EGLD from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- 
+[Back to top](#top){: .btn .btn-purple }
 
- 
-
-<ul> <li>If server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `offEglTransferEthKMS()`
 
 ### Example
 
-[👉 View "**offEglTransferEthKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offEglTransferEthKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offEglTransferEthKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offEglTransferEthKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1449,19 +1547,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send EGLD from a virtual account to the blockchain
+> Send EGLD from a virtual account to the blockchain
 
-TransferEthKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offEglTransferEthMnemonic()`
 
 ### Example
 
-[👉 View "**offEglTransferEthMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offEglTransferEthMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offEglTransferEthMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offEglTransferEthMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1487,19 +1589,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send EGLD from a virtual account to the blockchain
+> Send EGLD from a virtual account to the blockchain
 
-TransferEthMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKcsDeployErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**offKcsDeployErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKcsDeployErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1525,19 +1631,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKcsDeployErc20OffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**offKcsDeployErc20OffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKcsDeployErc20OffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1563,19 +1673,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKcsDeployErc20OffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**offKcsDeployErc20OffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKcsDeployErc20OffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1601,19 +1715,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKcsDeployErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**offKcsDeployErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKcsDeployErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1639,31 +1757,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new Kcs ERC20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract. This is a helper method, which is combination of [Register new Kcs ERC20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying a KCC ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying a KCC ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `offKcsDeployErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**offKcsDeployErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKcsDeployErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1689,19 +1809,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKcsDeployErc20OffchainPKXpub()`
 
 ### Example
 
-[👉 View "**offKcsDeployErc20OffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKcsDeployErc20OffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKcsDeployErc20OffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1727,19 +1851,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a KuCoin Community Chain (KCC) ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKlaDeployErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**offKlaDeployErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaDeployErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1765,19 +1893,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKlaDeployErc20OffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**offKlaDeployErc20OffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaDeployErc20OffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1803,19 +1935,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKlaDeployErc20OffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**offKlaDeployErc20OffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaDeployErc20OffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1841,19 +1977,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKlaDeployErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**offKlaDeployErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaDeployErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1879,31 +2019,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy a Klaytn ERC-20-equivalent smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new ERC20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy a Klaytn ERC-20-equivalent smart contract. This is a helper method, which is combination of [Register new ERC20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `offKlaDeployErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**offKlaDeployErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaDeployErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1929,19 +2071,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKlaDeployErc20OffchainPKXpub()`
 
 ### Example
 
-[👉 View "**offKlaDeployErc20OffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaDeployErc20OffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaDeployErc20OffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -1967,19 +2113,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a Klaytn ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKlaTransferEth()`
 
 ### Example
 
-[👉 View "**offKlaTransferEth.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaTransferEth.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaTransferEth.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaTransferEth.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2005,31 +2155,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send KLAY from a virtual account to the blockchain
+> Send KLAY from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send KLAY or ERC-20-equivalent tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send KLAY or ERC-20-equivalent tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If KLAY server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- 
+[Back to top](#top){: .btn .btn-purple }
 
- 
-
-<ul> <li>If KLAY server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `offKlaTransferEthKMS()`
 
 ### Example
 
-[👉 View "**offKlaTransferEthKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaTransferEthKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaTransferEthKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaTransferEthKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2055,19 +2202,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send KLAY from a virtual account to the blockchain
+> Send KLAY from a virtual account to the blockchain
 
-TransferEthKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offKlaTransferEthMnemonic()`
 
 ### Example
 
-[👉 View "**offKlaTransferEthMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaTransferEthMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offKlaTransferEthMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offKlaTransferEthMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2093,19 +2244,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send KLAY from a virtual account to the blockchain
+> Send KLAY from a virtual account to the blockchain
 
-TransferEthMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offOneDeployErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**offOneDeployErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneDeployErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2133,19 +2288,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
+> Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offOneDeployErc20OffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**offOneDeployErc20OffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneDeployErc20OffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2173,19 +2332,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
+> Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offOneDeployErc20OffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**offOneDeployErc20OffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneDeployErc20OffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2213,19 +2376,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
+> Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offOneDeployErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**offOneDeployErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneDeployErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2253,31 +2420,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
+> Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy a Harmony HRM-20 smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new HRM20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy a Harmony HRM-20 smart contract. This is a helper method, which is combination of [Register new HRM20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying a Harmony HRM-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying a Harmony HRM-20 smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `offOneDeployErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**offOneDeployErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneDeployErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2305,19 +2474,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
+> Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offOneDeployErc20OffchainPKXpub()`
 
 ### Example
 
-[👉 View "**offOneDeployErc20OffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneDeployErc20OffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneDeployErc20OffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2345,19 +2518,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
+> Deploy a Harmony HRM-20 smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offOneTransferEth()`
 
 ### Example
 
-[👉 View "**offOneTransferEth.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneTransferEth.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneTransferEth.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneTransferEth.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2385,31 +2562,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ONE from a virtual account to the blockchain
+> Send ONE from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send ONE (Harmony) or HRM-20 tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send ONE (Harmony) or HRM-20 tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If ONE server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- 
+[Back to top](#top){: .btn .btn-purple }
 
- 
-
-<ul> <li>If ONE server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `offOneTransferEthKMS()`
 
 ### Example
 
-[👉 View "**offOneTransferEthKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneTransferEthKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneTransferEthKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneTransferEthKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2437,19 +2611,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ONE from a virtual account to the blockchain
+> Send ONE from a virtual account to the blockchain
 
-TransferEthKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offOneTransferEthMnemonic()`
 
 ### Example
 
-[👉 View "**offOneTransferEthMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneTransferEthMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offOneTransferEthMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offOneTransferEthMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2477,19 +2655,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ONE from a virtual account to the blockchain
+> Send ONE from a virtual account to the blockchain
 
-TransferEthMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offPolTransferEth()`
 
 ### Example
 
-[👉 View "**offPolTransferEth.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offPolTransferEth.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offPolTransferEth.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offPolTransferEth.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2515,27 +2697,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send MATIC from a virtual account to the blockchain
+> Send MATIC from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send MATIC (Polygon) or ERC-20-equivalent Polygon tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send MATIC (Polygon) or ERC-20-equivalent Polygon tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Polygon server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>If Polygon server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `offPolTransferEthKMS()`
 
 ### Example
 
-[👉 View "**offPolTransferEthKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offPolTransferEthKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offPolTransferEthKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offPolTransferEthKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2561,19 +2744,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send MATIC from a virtual account to the blockchain
+> Send MATIC from a virtual account to the blockchain
 
-TransferEthKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offPolTransferEthMnemonic()`
 
 ### Example
 
-[👉 View "**offPolTransferEthMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offPolTransferEthMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offPolTransferEthMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offPolTransferEthMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2599,19 +2786,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send MATIC from a virtual account to the blockchain
+> Send MATIC from a virtual account to the blockchain
 
-TransferEthMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offXdcDeployErc20OffchainKMSAddress()`
 
 ### Example
 
-[👉 View "**offXdcDeployErc20OffchainKMSAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainKMSAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcDeployErc20OffchainKMSAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainKMSAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2637,19 +2828,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offXdcDeployErc20OffchainKMSXpub()`
 
 ### Example
 
-[👉 View "**offXdcDeployErc20OffchainKMSXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainKMSXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcDeployErc20OffchainKMSXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainKMSXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2675,19 +2870,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainKMSXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offXdcDeployErc20OffchainMnemXpub()`
 
 ### Example
 
-[👉 View "**offXdcDeployErc20OffchainMnemXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainMnemXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcDeployErc20OffchainMnemXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainMnemXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2713,19 +2912,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainMnemXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offXdcDeployErc20OffchainMnemonicAddress()`
 
 ### Example
 
-[👉 View "**offXdcDeployErc20OffchainMnemonicAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainMnemonicAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcDeployErc20OffchainMnemonicAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainMnemonicAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2751,31 +2954,33 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
 
 **4 credits per API call**
 
- Deploy a XinFin ERC-20-equivalent smart contract. This is a helper method, which is combination of <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token">Register new ERC20 token in the ledger</a> and <a href="https://apidoc.tatum.io/tag/Fungible-Tokens-(ERC-20-or-compatible)#operation/Erc20Deploy">Deploy blockchain ERC20</a>.
+Deploy a XinFin ERC-20-equivalent smart contract. This is a helper method, which is combination of [Register new ERC20 token in the ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/registererc20token) and [Deploy blockchain ERC20](https://apidoc.tatum.io/tag/Fungible-Tokens-%28ERC-20-or-compatible%29#operation/Erc20Deploy).
 
- After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
+After deploying a contract to blockchain, the contract address will become available and must be stored within Tatum. Otherwise, it will not be possible to interact with it and starts automatic blockchain synchronization.
 
- **Signing a transaction**
+**Signing a transaction** When deploying a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- When deploying a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `offXdcDeployErc20OffchainPKAddress()`
 
 ### Example
 
-[👉 View "**offXdcDeployErc20OffchainPKAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainPKAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcDeployErc20OffchainPKAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainPKAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2801,19 +3006,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKAddress operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offXdcDeployErc20OffchainPKXpub()`
 
 ### Example
 
-[👉 View "**offXdcDeployErc20OffchainPKXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainPKXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcDeployErc20OffchainPKXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcDeployErc20OffchainPKXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2839,19 +3048,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
+> Deploy a XinFin ERC-20-equivalent smart contract to the blockchain and a virtual account
 
-DeployErc20OffchainPKXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offXdcTransferEth()`
 
 ### Example
 
-[👉 View "**offXdcTransferEth.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcTransferEth.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcTransferEth.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcTransferEth.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2877,31 +3090,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send XDC from a virtual account to the blockchain
+> Send XDC from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send XDC (XinFin) or ERC-20-equivalent XinFin tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send XDC (XinFin) or ERC-20-equivalent XinFin tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If XDC server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- 
+[Back to top](#top){: .btn .btn-purple }
 
- 
-
-<ul> <li>If XDC server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `offXdcTransferEthKMS()`
 
 ### Example
 
-[👉 View "**offXdcTransferEthKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcTransferEthKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcTransferEthKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcTransferEthKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2927,19 +3137,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send XDC from a virtual account to the blockchain
+> Send XDC from a virtual account to the blockchain
 
-TransferEthKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `offXdcTransferEthMnemonic()`
 
 ### Example
 
-[👉 View "**offXdcTransferEthMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcTransferEthMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **offXdcTransferEthMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/offXdcTransferEthMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -2965,19 +3179,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send XDC from a virtual account to the blockchain
+> Send XDC from a virtual account to the blockchain
 
-TransferEthMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `storeTokenAddress()`
 
 ### Example
 
-[👉 View "**storeTokenAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/storeTokenAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **storeTokenAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/storeTokenAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3005,29 +3223,32 @@ void (empty response body)
 
 ### Description
 
-Set the contract address of an ERC-20, ERC-20-equivalent, or TRC-10 token
+> Set the contract address of an ERC-20, ERC-20-equivalent, or TRC-10 token
 
 **2 credits per API call**
 
- Set the contract address of an ERC-20, ERC-20-equivalent (for example, BEP-20, HRM-20, and so on), or TRC-10 token to be able to communicate with the smart contract.
+Set the contract address of an ERC-20, ERC-20-equivalent (for example, BEP-20, HRM-20, and so on), or TRC-10 token to be able to communicate with the smart contract.
 
- After creating and deploying the token to the blockchain, the smart contract address is generated and must be set within Tatum. If the address is not set, the Tatum platform will not be able to detect incoming deposits of the tokens and transfer the tokens from virtual accounts to blockchain addresses.
+After creating and deploying the token to the blockchain, the smart contract address is generated and must be set within Tatum. If the address is not set, the Tatum platform will not be able to detect incoming deposits of the tokens and transfer the tokens from virtual accounts to blockchain addresses.
 
- **NOTE:**
+**NOTE:**
 
- 
+* For **Algorand**, the contract address is the asset ID (`assetId`), for example, `55351976`.
+* For **TRON**, the contract address is the token ID (`tokenId`), for example, `1234567`.
 
-<ul> <li>For **Algorand**, the contract address is the asset ID (<code>assetId</code>), for example, <code>55351976</code>.</li> <li>For **TRON**, the contract address is the token ID (<code>tokenId</code>), for example, <code>1234567</code>.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `transferAlgo()`
 
 ### Example
 
-[👉 View "**transferAlgo.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferAlgo.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferAlgo.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferAlgo.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3053,37 +3274,38 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ALGO from a virtual account to the blockchain
+> Send ALGO from a virtual account to the blockchain
 
 **4 credits per API call**
 
- Send Algos or ERC-20-equivalent Algorand tokens from a virtual account (even from a virtual account without deposit addresses adssigned) to the Algorand blockchain.
+Send Algos or ERC-20-equivalent Algorand tokens from a virtual account (even from a virtual account without deposit addresses adssigned) to the Algorand blockchain.
 
- The recipient has to agree in advance to receive assets because Algorand charges users for storing assets on their addresses, and an Algorand blockchain address by default does not receive assets unless explicitly agreed. Before sending any asset from a virtual account to the blockchain, make sure that the recipient <a href="https://apidoc.tatum.io/tag/Algorand#operation/AlgorandBlockchainReceiveAsset" target="_blank">has agreed to receive the assets</a> to their address.
+The recipient has to agree in advance to receive assets because Algorand charges users for storing assets on their addresses, and an Algorand blockchain address by default does not receive assets unless explicitly agreed. Before sending any asset from a virtual account to the blockchain, make sure that the recipient [has agreed to receive the assets](https://apidoc.tatum.io/tag/Algorand#operation/AlgorandBlockchainReceiveAsset) to their address.
 
- Sending Algorand assets creates an internal Tatum withdrawal request with an ID. If everything works as expected, the withdrawal request is marked as complete and a transaction ID is assigned to it.
+Sending Algorand assets creates an internal Tatum withdrawal request with an ID. If everything works as expected, the withdrawal request is marked as complete and a transaction ID is assigned to it.
 
- 
+* If a server connection is unavailable, the withdrawal request is cancelled.
+* If the transfer to the blockchain is successful, but the Tatum infrastructure cannot be accesses, the ID of the blockchain transaction is returned and you have to [complete the withdrawal request manually](https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal). Otherwise, all other withdrawals will be pending.
 
-<ul> <li>If a server connection is unavailable, the withdrawal request is cancelled.</li> <li>If the transfer to the blockchain is successful, but the Tatum infrastructure cannot be accesses, the ID of the blockchain transaction is returned and you have to <a href="https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal" target="_blank">complete the withdrawal request manually</a>. Otherwise, all other withdrawals will be pending.</li> </ul>
+**Signing a transaction** When sending Algos or ERC-20-equivalent Algorand tokens, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
 
- **Signing a transaction**
+Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
 
- When sending Algos or ERC-20-equivalent Algorand tokens, you are charged a fee for the transaction, and you must sign the transaction with the private key of the blockchain address from which the fee will be deducted.
+For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum [Key Management System (KMS)](https://github.com/tatumio/tatum-kms) and provide the signature ID instead of the private key in the API. Alternatively, you can use the [Tatum JavaScript client](https://github.com/tatumio/tatum-js).
 
- Providing the private key in the API is not a secure way of signing transactions, because the private key can be stolen or exposed. Your private keys should never leave your security perimeter. You should use the private keys only for testing a solution you are building on the **testnet** of a blockchain.
+[Back to top](#top){: .btn .btn-purple }
 
- For signing transactions on the **mainnet**, we strongly recommend that you use the Tatum <a href="https://github.com/tatumio/tatum-kms" target="_blank">Key Management System (KMS)</a> and provide the signature ID instead of the private key in the API. Alternatively, you can use the <a href="https://github.com/tatumio/tatum-js" target="_blank">Tatum JavaScript client</a>.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferAlgoErc20()`
 
 ### Example
 
-[👉 View "**transferAlgoErc20.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferAlgoErc20.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferAlgoErc20.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferAlgoErc20.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3109,19 +3331,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ALGO from a virtual account to the blockchain
+> Send ALGO from a virtual account to the blockchain
 
-TransferAlgoErc20 operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferAlgoKMS()`
 
 ### Example
 
-[👉 View "**transferAlgoKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferAlgoKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferAlgoKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferAlgoKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3147,19 +3373,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ALGO from a virtual account to the blockchain
+> Send ALGO from a virtual account to the blockchain
 
-TransferAlgoKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBchKMS()`
 
 ### Example
 
-[👉 View "**transferBchKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBchKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBchKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBchKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3185,19 +3415,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BCH from a virtual account to the blockchain
+> Send BCH from a virtual account to the blockchain
 
-TransferBchKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBchKeyPair()`
 
 ### Example
 
-[👉 View "**transferBchKeyPair.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBchKeyPair.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBchKeyPair.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBchKeyPair.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3223,19 +3457,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BCH from a virtual account to the blockchain
+> Send BCH from a virtual account to the blockchain
 
-TransferBchKeyPair operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBchMnemonic()`
 
 ### Example
 
-[👉 View "**transferBchMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBchMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBchMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBchMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3261,35 +3499,35 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BCH from a virtual account to the blockchain
+> Send BCH from a virtual account to the blockchain
 
-<h4>10 credits per API call.</h4>
+#### 10 credits per API call.
 
- Send BCH (Bitcoin Cash) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
-
-<ul> <li>If Bitcoin Cash server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
+Send BCH (Bitcoin Cash) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Bitcoin Cash server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
  There are two possibilites how the transaction on the blockchain can be created: 
+* Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0\. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.
+* Using keyPair - addresses which are used as a source of the transaction are entered manually
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This method is a helper method, which internally wraps these steps: 
+1. [Store withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal) \- create a ledger transaction, which debits the assets on the sender account.
+2. [Perform blockchain transaction](https://apidoc.tatum.io/tag/Bitcoin-Cash#operation/BchTransferBlockchain)
+3. [Complete withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal) \- move the withdrawal to the completed state, when all of the previous steps were successful.
+ This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.</li> <li>Using keyPair - addresses which are used as a source of the transaction are entered manually</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This method is a helper method, which internally wraps these steps: 
-
-<ol> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal">Store withdrawal</a> - create a ledger transaction, which debits the assets on the sender account.</li> <li><a href="https://apidoc.tatum.io/tag/Bitcoin-Cash#operation/BchTransferBlockchain">Perform blockchain transaction</a></li> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal">Complete withdrawal</a> - move the withdrawal to the completed state, when all of the previous steps were successful.</li> </ol>
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferBnb()`
 
 ### Example
 
-[👉 View "**transferBnb.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBnb.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBnb.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBnb.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3315,27 +3553,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BNB from a virtual account to the blockchain
+> Send BNB from a virtual account to the blockchain
 
-<h4>10 credits per API call.</h4>
+#### 10 credits per API call.
 
- Send BNB (BNB Beacon Chain) or BNB assets from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send BNB (BNB Beacon Chain) or BNB assets from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If BNB server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>If BNB server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferBnbKMS()`
 
 ### Example
 
-[👉 View "**transferBnbKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBnbKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBnbKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBnbKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3361,19 +3600,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BNB from a virtual account to the blockchain
+> Send BNB from a virtual account to the blockchain
 
-TransferBnbKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBsc()`
 
 ### Example
 
-[👉 View "**transferBsc.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBsc.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBsc.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBsc.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3399,31 +3642,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BSC from a virtual account to the blockchain
+> Send BSC from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send BSC (BNB Smart Chain) or BEP-20 tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send BSC (BNB Smart Chain) or BEP-20 tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If BSC server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- 
+[Back to top](#top){: .btn .btn-purple }
 
- 
-
-<ul> <li>If BSC server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferBscKMS()`
 
 ### Example
 
-[👉 View "**transferBscKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBscKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBscKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBscKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3449,19 +3689,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BSC from a virtual account to the blockchain
+> Send BSC from a virtual account to the blockchain
 
-TransferBscKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBscMnemonic()`
 
 ### Example
 
-[👉 View "**transferBscMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBscMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBscMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBscMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3487,19 +3731,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BSC from a virtual account to the blockchain
+> Send BSC from a virtual account to the blockchain
 
-TransferBscMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBtcKMS()`
 
 ### Example
 
-[👉 View "**transferBtcKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBtcKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBtcKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBtcKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3525,19 +3773,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BTC from a virtual account to the blockchain
+> Send BTC from a virtual account to the blockchain
 
-TransferBtcKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBtcKeyPair()`
 
 ### Example
 
-[👉 View "**transferBtcKeyPair.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBtcKeyPair.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBtcKeyPair.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBtcKeyPair.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3563,19 +3815,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BTC from a virtual account to the blockchain
+> Send BTC from a virtual account to the blockchain
 
-TransferBtcKeyPair operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferBtcMnemonic()`
 
 ### Example
 
-[👉 View "**transferBtcMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBtcMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferBtcMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferBtcMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3601,35 +3857,35 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send BTC from a virtual account to the blockchain
+> Send BTC from a virtual account to the blockchain
 
-<h4>2 credits per API call.</h4>
+#### 2 credits per API call.
 
- Send BTC (Bitcoin) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
-
-<ul> <li>If Bitcoin server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
+Send BTC (Bitcoin) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Bitcoin server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
  There are two possibilites how the transaction on the blockchain can be created: 
+* Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0\. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.
+* Using keyPair - addresses which are used as a source of the transaction are entered manually
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This method is a helper method, which internally wraps these steps: 
+1. [Store withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal) \- create a ledger transaction, which debits the assets on the sender account.
+2. [Perform blockchain transaction](https://apidoc.tatum.io/tag/Bitcoin#operation/BtcTransferBlockchain)
+3. [Complete withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal) \- move the withdrawal to the completed state, when all of the previous steps were successful.
+ When some of the steps fails, [Cancel withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/cancelInProgressWithdrawal) operation is used, which cancels withdrawal and creates refund transaction to the sender account. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.</li> <li>Using keyPair - addresses which are used as a source of the transaction are entered manually</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This method is a helper method, which internally wraps these steps: 
-
-<ol> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal">Store withdrawal</a> - create a ledger transaction, which debits the assets on the sender account.</li> <li><a href="https://apidoc.tatum.io/tag/Bitcoin#operation/BtcTransferBlockchain">Perform blockchain transaction</a></li> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal">Complete withdrawal</a> - move the withdrawal to the completed state, when all of the previous steps were successful.</li> </ol>
-
- When some of the steps fails, <a href="https://apidoc.tatum.io/tag/Withdrawal#operation/cancelInProgressWithdrawal">Cancel withdrawal</a> operation is used, which cancels withdrawal and creates refund transaction to the sender account.</li> This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferCelo()`
 
 ### Example
 
-[👉 View "**transferCelo.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferCelo.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferCelo.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferCelo.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3655,31 +3911,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send CELO from a virtual account to the blockchain
+> Send CELO from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send CELO (Celo), ERC-20-equivalent Celo tokens, cUSD, or cEUR from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send CELO (Celo), ERC-20-equivalent Celo tokens, cUSD, or cEUR from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Celo server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- 
+[Back to top](#top){: .btn .btn-purple }
 
- 
-
-<ul> <li>If Celo server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferCeloKMS()`
 
 ### Example
 
-[👉 View "**transferCeloKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferCeloKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferCeloKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferCeloKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3705,19 +3958,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send CELO from a virtual account to the blockchain
+> Send CELO from a virtual account to the blockchain
 
-TransferCeloKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferCeloMnemonic()`
 
 ### Example
 
-[👉 View "**transferCeloMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferCeloMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferCeloMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferCeloMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3743,19 +4000,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send CELO from a virtual account to the blockchain
+> Send CELO from a virtual account to the blockchain
 
-TransferCeloMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferDogeKMS()`
 
 ### Example
 
-[👉 View "**transferDogeKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferDogeKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferDogeKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferDogeKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3781,19 +4042,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send DOGE from a virtual account to the blockchain
+> Send DOGE from a virtual account to the blockchain
 
-TransferDogeKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferDogeKeyPair()`
 
 ### Example
 
-[👉 View "**transferDogeKeyPair.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferDogeKeyPair.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferDogeKeyPair.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferDogeKeyPair.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3819,19 +4084,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send DOGE from a virtual account to the blockchain
+> Send DOGE from a virtual account to the blockchain
 
-TransferDogeKeyPair operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferDogeMnemonic()`
 
 ### Example
 
-[👉 View "**transferDogeMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferDogeMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferDogeMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferDogeMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3857,35 +4126,35 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send DOGE from a virtual account to the blockchain
+> Send DOGE from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send DOGE (Dogecoin) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
-
-<ul> <li>If Dogecoin server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
+Send DOGE (Dogecoin) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Dogecoin server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
  There are two possibilites how the transaction on the blockchain can be created: 
+* Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0\. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.
+* Using keyPair - addresses which are used as a source of the transaction are entered manually
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This method is a helper method, which internally wraps these steps: 
+1. [Store withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal) \- create a ledger transaction, which debits the assets on the sender account.
+2. [Perform blockchain transaction](https://apidoc.tatum.io/tag/Dogecoin#operation/DogeTransferBlockchain)
+3. [Complete withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal) \- move the withdrawal to the completed state, when all of the previous steps were successful.
+ This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.</li> <li>Using keyPair - addresses which are used as a source of the transaction are entered manually</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This method is a helper method, which internally wraps these steps: 
-
-<ol> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal">Store withdrawal</a> - create a ledger transaction, which debits the assets on the sender account.</li> <li><a href="https://apidoc.tatum.io/tag/Dogecoin#operation/DogeTransferBlockchain">Perform blockchain transaction</a></li> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal">Complete withdrawal</a> - move the withdrawal to the completed state, when all of the previous steps were successful.</li> </ol>
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferErc20()`
 
 ### Example
 
-[👉 View "**transferErc20.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferErc20.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferErc20.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferErc20.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3911,27 +4180,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send Ethereum ERC-20 tokens from a virtual account to the blockchain
+> Send Ethereum ERC-20 tokens from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send Ethereum ERC-20 tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send Ethereum ERC-20 tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Ethereum server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>If Ethereum server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferErc20KMS()`
 
 ### Example
 
-[👉 View "**transferErc20KMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferErc20KMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferErc20KMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferErc20KMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3957,19 +4227,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send Ethereum ERC-20 tokens from a virtual account to the blockchain
+> Send Ethereum ERC-20 tokens from a virtual account to the blockchain
 
-TransferErc20KMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferErc20Mnemonic()`
 
 ### Example
 
-[👉 View "**transferErc20Mnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferErc20Mnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferErc20Mnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferErc20Mnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -3995,19 +4269,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send Ethereum ERC-20 tokens from a virtual account to the blockchain
+> Send Ethereum ERC-20 tokens from a virtual account to the blockchain
 
-TransferErc20Mnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferEth()`
 
 ### Example
 
-[👉 View "**transferEth.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferEth.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferEth.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferEth.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4033,27 +4311,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ETH from a virtual account to the blockchain
+> Send ETH from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send ETH (Ethereum) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send ETH (Ethereum) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Ethereum server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>If Ethereum server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferEthKMS()`
 
 ### Example
 
-[👉 View "**transferEthKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferEthKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferEthKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferEthKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4079,19 +4358,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ETH from a virtual account to the blockchain
+> Send ETH from a virtual account to the blockchain
 
-TransferEthKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferEthMnemonic()`
 
 ### Example
 
-[👉 View "**transferEthMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferEthMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferEthMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferEthMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4117,19 +4400,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send ETH from a virtual account to the blockchain
+> Send ETH from a virtual account to the blockchain
 
-TransferEthMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferFlowKMS()`
 
 ### Example
 
-[👉 View "**transferFlowKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferFlowKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferFlowKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferFlowKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4155,19 +4442,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send FLOW from a virtual account to the blockchain
+> Send FLOW from a virtual account to the blockchain
 
-TransferFlowKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferFlowMnemonic()`
 
 ### Example
 
-[👉 View "**transferFlowMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferFlowMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferFlowMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferFlowMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4193,35 +4484,35 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send FLOW from a virtual account to the blockchain
+> Send FLOW from a virtual account to the blockchain
 
-<h4>100 credits per API call. Tatum covers the fee connected to the transaction costs in subscription credits. This operation can be done on mainnet only for paid plans.</h4>
+#### 100 credits per API call. Tatum covers the fee connected to the transaction costs in subscription credits. This operation can be done on mainnet only for paid plans.
 
- Send FLOW (Flow) or FUSD from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
-
-<ul> <li>If Flow server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
+Send FLOW (Flow) or FUSD from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Flow server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
  There are two possibilites how the transaction on the blockchain can be created: 
+* Using mnemonic and index - private key is generated based on the index in the mnemonic.
+* Using secret - private keys is entered manually.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This method is a helper method, which internally wraps these steps: 
+1. [Store withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal) \- create a ledger transaction, which debits the assets on the sender account.
+2. [Perform blockchain transaction](https://apidoc.tatum.io/tag/Flow#operation/FlowTransferBlockchain)
+3. [Complete withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal) \- move the withdrawal to the completed state, when all of the previous steps were successful.
+ This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>Using mnemonic and index - private key is generated based on the index in the mnemonic.</li> <li>Using secret - private keys is entered manually.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This method is a helper method, which internally wraps these steps: 
-
-<ol> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal">Store withdrawal</a> - create a ledger transaction, which debits the assets on the sender account.</li> <li><a href="https://apidoc.tatum.io/tag/Flow#operation/FlowTransferBlockchain">Perform blockchain transaction</a></li> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal">Complete withdrawal</a> - move the withdrawal to the completed state, when all of the previous steps were successful.</li> </ol>
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferFlowPK()`
 
 ### Example
 
-[👉 View "**transferFlowPK.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferFlowPK.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferFlowPK.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferFlowPK.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4247,19 +4538,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send FLOW from a virtual account to the blockchain
+> Send FLOW from a virtual account to the blockchain
 
-TransferFlowPK operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferKCS()`
 
 ### Example
 
-[👉 View "**transferKCS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferKCS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferKCS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferKCS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4285,27 +4580,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send KCS from a virtual account to the blockchain
+> Send KCS from a virtual account to the blockchain
 
-<h4>4 credits per API call.</h4>
+#### 4 credits per API call.
 
- Send KCS (KuCoin Community Chain (KCC)) or ERC-20-equivalent KCC tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send KCS (KuCoin Community Chain (KCC)) or ERC-20-equivalent KCC tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If KCS server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>If KCS server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferKCSKMS()`
 
 ### Example
 
-[👉 View "**transferKCSKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferKCSKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferKCSKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferKCSKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4331,19 +4627,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send KCS from a virtual account to the blockchain
+> Send KCS from a virtual account to the blockchain
 
-TransferKCSKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferKCSMnemonic()`
 
 ### Example
 
-[👉 View "**transferKCSMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferKCSMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferKCSMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferKCSMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4369,19 +4669,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send KCS from a virtual account to the blockchain
+> Send KCS from a virtual account to the blockchain
 
-TransferKCSMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferLtcKMS()`
 
 ### Example
 
-[👉 View "**transferLtcKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferLtcKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferLtcKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferLtcKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4407,19 +4711,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send LTC from a virtual account to the blockchain
+> Send LTC from a virtual account to the blockchain
 
-TransferLtcKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferLtcKeyPair()`
 
 ### Example
 
-[👉 View "**transferLtcKeyPair.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferLtcKeyPair.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferLtcKeyPair.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferLtcKeyPair.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4445,19 +4753,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send LTC from a virtual account to the blockchain
+> Send LTC from a virtual account to the blockchain
 
-TransferLtcKeyPair operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferLtcMnemonic()`
 
 ### Example
 
-[👉 View "**transferLtcMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferLtcMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferLtcMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferLtcMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4483,35 +4795,35 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send LTC from a virtual account to the blockchain
+> Send LTC from a virtual account to the blockchain
 
-<h4>10 credits per API call.</h4>
+#### 10 credits per API call.
 
- Send LTC (Litecoin) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
-
-<ul> <li>If Litecoin server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
-
+Send LTC (Litecoin) from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Litecoin server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
  There are two possibilites how the transaction on the blockchain can be created: 
+* Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0\. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.
+* Using keyPair - addresses which are used as a source of the transaction are entered manually
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This method is a helper method, which internally wraps these steps: 
+1. [Store withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal) \- create a ledger transaction, which debits the assets on the sender account.
+2. [Perform blockchain transaction](https://apidoc.tatum.io/tag/Litecoin#operation/LtcTransferBlockchain)
+3. [Complete withdrawal](https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal) \- move the withdrawal to the completed state, when all of the previous steps were successful.
+ This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>Using mnemonic - all of the addresses, that are generated from the mnemonic are scanned for the incoming deposits which are used as a source of the transaction. Assets, which are not used in a transaction are moved to the system address wih the derivation index 0. Address with index 0 cannot be assigned automatically to any account and is used for custodial wallet use cases. For non-custodial wallets, field **attr** should be present and it should be address with the index 1 of the connected wallet.</li> <li>Using keyPair - addresses which are used as a source of the transaction are entered manually</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This method is a helper method, which internally wraps these steps: 
-
-<ol> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/storeWithdrawal">Store withdrawal</a> - create a ledger transaction, which debits the assets on the sender account.</li> <li><a href="https://apidoc.tatum.io/tag/Litecoin#operation/LtcTransferBlockchain">Perform blockchain transaction</a></li> <li><a href="https://apidoc.tatum.io/tag/Withdrawal#operation/completeWithdrawal">Complete withdrawal</a> - move the withdrawal to the completed state, when all of the previous steps were successful.</li> </ol>
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferSol()`
 
 ### Example
 
-[👉 View "**transferSol.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferSol.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferSol.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferSol.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4537,29 +4849,32 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send SOL from a virtual account to the blockchain
+> Send SOL from a virtual account to the blockchain
 
 **10 credits per API call**
 
- Send SOL (Solana), USDC_SOL, or custom SPL tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it.
+Send SOL (Solana), USDC\_SOL, or custom SPL tokens from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it.
 
- 
+* If SOL server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
 
-<ul> <li>If SOL server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
+This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `transferSolKMS()`
 
 ### Example
 
-[👉 View "**transferSolKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferSolKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferSolKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferSolKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4585,19 +4900,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send SOL from a virtual account to the blockchain
+> Send SOL from a virtual account to the blockchain
 
-TransferSolKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferTron()`
 
 ### Example
 
-[👉 View "**transferTron.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferTron.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferTron.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferTron.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4623,27 +4942,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send TRON from a virtual account to the blockchain
+> Send TRON from a virtual account to the blockchain
 
-<h4>10 credits per API call.</h4>
+#### 10 credits per API call.
 
 Send TRON or TRX assets from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. If every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If Tron server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>If Tron server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferTronKMS()`
 
 ### Example
 
-[👉 View "**transferTronKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferTronKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferTronKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferTronKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4669,19 +4989,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send TRON from a virtual account to the blockchain
+> Send TRON from a virtual account to the blockchain
 
-TransferTronKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferTronMnemonic()`
 
 ### Example
 
-[👉 View "**transferTronMnemonic.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferTronMnemonic.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferTronMnemonic.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferTronMnemonic.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4707,19 +5031,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send TRON from a virtual account to the blockchain
+> Send TRON from a virtual account to the blockchain
 
-TransferTronMnemonic operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferXlm()`
 
 ### Example
 
-[👉 View "**transferXlm.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXlm.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferXlm.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXlm.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4745,29 +5073,32 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send XLM from a virtual account to the blockchain
+> Send XLM from a virtual account to the blockchain
 
 **10 credits per API call**
 
- Send XLM (Stellar) or XLM-based assets from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it.
+Send XLM (Stellar) or XLM-based assets from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it.
 
- 
+* If XLM server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
 
-<ul> <li>If XLM server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
+This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
+[Back to top](#top){: .btn .btn-purple }
 
-[Back to top](#top)
-
+---
 
 
 ## `transferXlmKMS()`
 
 ### Example
 
-[👉 View "**transferXlmKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXlmKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferXlmKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXlmKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4793,19 +5124,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send XLM from a virtual account to the blockchain
+> Send XLM from a virtual account to the blockchain
 
-TransferXlmKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `transferXrp()`
 
 ### Example
 
-[👉 View "**transferXrp.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXrp.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferXrp.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXrp.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4831,27 +5166,28 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send XRP from a virtual account to the blockchain
+> Send XRP from a virtual account to the blockchain
 
-<h4>10 credits per API call.</h4>
+#### 10 credits per API call.
 
- Send XRP from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+Send XRP from a virtual account to the blockchain. This will create Tatum internal withdrawal request with ID. When every system works as expected, withdrawal request is marked as complete and transaction id is assigned to it. 
+* If XRP server connection is unavailable, withdrawal request is cancelled.
+* If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.
+ It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them. This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, [Tatum KMS](https://github.com/tatumio/tatum-kms) should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
 
-<ul> <li>If XRP server connection is unavailable, withdrawal request is cancelled.</li> <li>If blockchain transfer is successful, but is it not possible to reach Tatum, transaction id of blockchain transaction is returned and withdrawal request must be completed manually, otherwise all other withdrawals will be pending.</li> </ul>
+[Back to top](#top){: .btn .btn-purple }
 
- It is possible to perform ledger to blockchain transaction for ledger accounts without blockchain address assigned to them.
-
- This operation needs the private key of the blockchain address. Every time the funds are transferred, the transaction must be signed with the corresponding private key. No one should ever send it's own private keys to the internet because there is a strong possibility of stealing keys and losing funds. In this method, it is possible to enter privateKey or signatureId. PrivateKey should be used only for quick development on testnet versions of blockchain when there is no risk of losing funds. In production, <a href="https://github.com/tatumio/tatum-kms" target="_blank">Tatum KMS</a> should be used for the highest security standards, and signatureId should be present in the request. Alternatively, using the Tatum client library for supported languages.
-
-[Back to top](#top)
-
+---
 
 
 ## `transferXrpKMS()`
 
 ### Example
 
-[👉 View "**transferXrpKMS.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXrpKMS.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **transferXrpKMS.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/transferXrpKMS.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4877,19 +5213,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Send XRP from a virtual account to the blockchain
+> Send XRP from a virtual account to the blockchain
 
-TransferXrpKMS operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `trcAddress()`
 
 ### Example
 
-[👉 View "**trcAddress.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/trcAddress.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **trcAddress.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/trcAddress.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4915,33 +5255,29 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Register a new TRON TRC-10 or TRC-20 token in the virtual account
+> Register a new TRON TRC-10 or TRC-20 token in the virtual account
 
-<h4>10 credits per API call.</h4>
+#### 10 credits per API call.
 
- First step to create new TRC 10/20 token with given supply on the Tron blockchain with support of Tatum's private ledger.
+First step to create new TRC 10/20 token with given supply on the Tron blockchain with support of Tatum's private ledger. This method only creates Tatum Private ledger virtual currency with predefined parameters. It will not generate any blockchain smart contract. The whole supply of TRC 10/20 token is stored in the customer's newly created account. Then it is possible to create new Tatum accounts with TRC 10/20 token name as account's currency. Newly created account is frozen until the specific TRC 10/20 smart contract address is linked with the Tatum virtual currency, representing the token. Order of the steps to create TRC 10/20 smart contract with Tatum private ledger support: 
+1. Create TRC 10/20 token (this API) - creates a virtual currency within Tatum
+2. [Deploy TRC 10](https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc10) or [TRC 20 smart contract](https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc20) \- create new TRC 10/20 smart contract on the blockchain
+3. [Store TRC 10/20 smart contract address](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/storetokenaddress) \- link newly created TRC 10/20 smart contract address with Tatum virtual currency - this operation enables frozen account and enables ledger synchronization for TRC 10/20 Tatum accounts
+ Blockchain address will be assigned to the virtual account as a deposit address. It can be defined via the address explicitly or by using xpub and derivationIndex. There is a helper method [Deploy TRC 10/20 Smart Contract to Blockchain and Ledger](https://apidoc.tatum.io/tag/Blockchain-operations/#operation/trondeploytrc), which wraps first 2 steps into 1 method.
 
- This method only creates Tatum Private ledger virtual currency with predefined parameters. It will not generate any blockchain smart contract.
+[Back to top](#top){: .btn .btn-purple }
 
- The whole supply of TRC 10/20 token is stored in the customer's newly created account. Then it is possible to create new Tatum accounts with TRC 10/20 token name as account's currency.
-
- Newly created account is frozen until the specific TRC 10/20 smart contract address is linked with the Tatum virtual currency, representing the token.
-
- Order of the steps to create TRC 10/20 smart contract with Tatum private ledger support: 
-
-<ol> <li>Create TRC 10/20 token (this API) - creates a virtual currency within Tatum</li> <li><a href="https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc10">Deploy TRC 10</a> or <a href="https://apidoc.tatum.io/tag/Tron#operation/TronCreateTrc20">TRC 20 smart contract</a> - create new TRC 10/20 smart contract on the blockchain</li> <li><a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/storetokenaddress">Store TRC 10/20 smart contract address</a> - link newly created TRC 10/20 smart contract address with Tatum virtual currency - this operation enables frozen account and enables ledger synchronization for TRC 10/20 Tatum accounts</li> </ol>
-
- Blockchain address will be assigned to the virtual account as a deposit address. It can be defined via the address explicitly or by using xpub and derivationIndex. There is a helper method <a href="https://apidoc.tatum.io/tag/Blockchain-operations/#operation/trondeploytrc">Deploy TRC 10/20 Smart Contract to Blockchain and Ledger</a>, which wraps first 2 steps into 1 method.
-
-[Back to top](#top)
-
+---
 
 
 ## `trcXpub()`
 
 ### Example
 
-[👉 View "**trcXpub.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/trcXpub.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **trcXpub.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/trcXpub.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -4967,19 +5303,23 @@ Name | Type | Description  | Notes
 
 ### Description
 
-Register a new TRON TRC-10 or TRC-20 token in the virtual account
+> Register a new TRON TRC-10 or TRC-20 token in the virtual account
 
-TrcXpub operation
 
-[Back to top](#top)
 
+[Back to top](#top){: .btn .btn-purple }
+
+---
 
 
 ## `xlmAssetOffchain()`
 
 ### Example
 
-[👉 View "**xlmAssetOffchain.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/xlmAssetOffchain.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **xlmAssetOffchain.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/xlmAssetOffchain.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -5005,23 +5345,27 @@ void (empty response body)
 
 ### Description
 
-Create an XLM-based asset
+> Create an XLM-based asset
 
-<h4>2 credits per API call.</h4>
+#### 2 credits per API call.
 
- Create an XLM-based asset in a virtual account. The asset must be created and configured on the Stellar blockchain before <a href="https://apidoc.tatum.io/tag/Stellar#operation/XlmTrustLineBlockchain">creating a trust line</a>.
+Create an XLM-based asset in a virtual account. The asset must be created and configured on the Stellar blockchain before [creating a trust line](https://apidoc.tatum.io/tag/Stellar#operation/XlmTrustLineBlockchain).
 
- This API call will create an internal virtual currency. You can create virtual accounts with off-chain support.
+This API call will create an internal virtual currency. You can create virtual accounts with off-chain support.
 
-[Back to top](#top)
+[Back to top](#top){: .btn .btn-purple }
 
+---
 
 
 ## `xrpAssetOffchain()`
 
 ### Example
 
-[👉 View "**xrpAssetOffchain.php**" ✨](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/xrpAssetOffchain.php)
+{: .new-title }
+> #️⃣ Execute command in terminal 
+> 
+> [✨ php -f **xrpAssetOffchain.php**](https://github.com/tatumio/tatum-php/blob/master/examples/Api/BlockchainOperationsApi/xrpAssetOffchain.php){: .btn .btn-green .mt-4}
 
 ### Request
 
@@ -5047,13 +5391,14 @@ void (empty response body)
 
 ### Description
 
-Create XRP based Asset
+> Create XRP based Asset
 
-<h4>2 credits per API call.</h4>
+#### 2 credits per API call.
 
- Create an XRP-based asset in a virtual account. The asset must be created and configured on the XRPL blockchain before <a href="https://apidoc.tatum.io/tag/XRP#operation/XrpTrustLineBlockchain">creating a trust line</a>.
+Create an XRP-based asset in a virtual account. The asset must be created and configured on the XRPL blockchain before [creating a trust line](https://apidoc.tatum.io/tag/XRP#operation/XrpTrustLineBlockchain).
 
- This API call will create an internal virtual currency. You can create virtual accounts with off-chain support.
+This API call will create an internal virtual currency. You can create virtual accounts with off-chain support.
 
-[Back to top](#top)
+[Back to top](#top){: .btn .btn-purple }
 
+---

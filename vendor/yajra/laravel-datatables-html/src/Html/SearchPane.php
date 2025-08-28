@@ -10,11 +10,6 @@ use Yajra\DataTables\Html\Editor\Fields\Options;
 
 class SearchPane extends Fluent
 {
-    public function __construct($attributes = [])
-    {
-        parent::__construct(['show' => true] + $attributes);
-    }
-
     /**
      * @param  array  $options
      * @return static
@@ -223,7 +218,9 @@ class SearchPane extends Fluent
      */
     public function modelOptions(EloquentBuilder|string $model, string $value, string $key = 'id'): SearchPane
     {
-        return $this->options(Options::model($model, $value, $key));
+        return $this->options(
+            Options::model($model, $value, $key)
+        );
     }
 
     /**
@@ -259,7 +256,9 @@ class SearchPane extends Fluent
         Closure $callback = null,
         string $connection = null
     ): static {
-        return $this->options(Options::table($table, $value, $key, $callback, $connection));
+        return $this->options(
+            Options::table($table, $value, $key, $callback, $connection)
+        );
     }
 
     /**
@@ -318,30 +317,6 @@ class SearchPane extends Fluent
     public function orthogonal(array|string $value): static
     {
         $this->attributes['orthogonal'] = $value;
-
-        return $this;
-    }
-
-    /**
-     * @param  boolean  $value
-     * @return $this
-     * @see https://datatables.net/reference/option/searchPanes.collapse
-     */
-    public function collapse(bool $value = true): static
-    {
-        $this->attributes['collapse'] = $value;
-
-        return $this;
-    }
-
-    /**
-     * @param  boolean  $value
-     * @return $this
-     * @see https://datatables.net/reference/option/searchPanes.initCollapsed
-     */
-    public function initCollapsed(bool $value = false): static
-    {
-        $this->attributes['initCollapsed'] = $value;
 
         return $this;
     }

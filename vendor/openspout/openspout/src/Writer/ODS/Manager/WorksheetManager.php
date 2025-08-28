@@ -25,13 +25,13 @@ use OpenSpout\Writer\ODS\Manager\Style\StyleManager;
 final class WorksheetManager implements WorksheetManagerInterface
 {
     /** @var ODSEscaper Strings escaper */
-    private readonly ODSEscaper $stringsEscaper;
+    private ODSEscaper $stringsEscaper;
 
     /** @var StyleManager Manages styles */
-    private readonly StyleManager $styleManager;
+    private StyleManager $styleManager;
 
     /** @var StyleMerger Helper to merge styles together */
-    private readonly StyleMerger $styleMerger;
+    private StyleMerger $styleMerger;
 
     /**
      * WorksheetManager constructor.

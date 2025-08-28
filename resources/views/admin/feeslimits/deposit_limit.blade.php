@@ -2,19 +2,23 @@
 @section('title', 'Fees & Limits')
 
 @section('head_style')
-  <!-- custom-checkbox -->
   <link rel="stylesheet" type="text/css" href="{{ asset('public/dist/css/custom-checkbox.css') }}">
-
   <style type="text/css">
+    .charge-range{
+      border: 1px solid #ddd; 
+      border-radius: 3px; 
+      padding: 15px 0px 0px;
+      margin-bottom: 15px;
+    }
+
     @media only screen and (max-width: 767px) {
-        .default_currency_side_text {
-            font-size: 12px !important;
-            float: right;
-            margin: 0 0 10px;
-        }
+      .default_currency_side_text {
+        font-size: 12px !important;
+        float: right;
+        margin: 0 0 10px;
+      }
     }
   </style>
-
 @endsection
 
 @section('page_content')
@@ -30,583 +34,492 @@
 
   <div class="box">
     <div class="box-body">
-
       <div class="row">
-          <div class="col-md-2">
-            <div class="dropdown pull-left" style="margin-top: 10px;">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Currency : <span class="currencyName">{{ $currency->name }}</span>
-              <span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                @foreach($currencyList as $currencyItem)
-                  <li class="listItem" data-rel="{{$currencyItem->id}}" data-default="{{ $currencyItem->default }}">
-                    <a href="#">{{$currencyItem->name}}</a>
-                  </li>
-                @endforeach
-              </ul>
-            </div>
+        <div class="col-md-6">          
+          <div class="dropdown pull-left" style="margin-top: 10px;">
+            <button class="btn btn-default dropdown-toggle subscriptionSelectBtn" type="button" data-toggle="dropdown">
+              Subscription : <span class="SubscriptionTitle">{{ $subscription->title }}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu subscriptionSelect">
+              @foreach($subscriptionList as $subscriptionItem)
+                <li class="listItem 
+                    {{ $subscriptionItem->id == $subscription->id ? 'active' : '' }}"
+                    data-rel="{{ $subscriptionItem->id }}">
+                  <a href="#">{{ ucfirst($subscriptionItem->title) }}</a>
+                </li>
+              @endforeach
+            </ul>
           </div>
-          <div class="col-md-2 col-md-offset-8 defaultCurrencyDiv" style="display: none;">
-              <h4 class="form-control-static pull-right"><span class="label label-success">Default Currency</span></h4>
-          </div>
-      </div>
+        </div>
 
+        <div class="col-md-6">          
+          <div class="dropdown pull-right" style="margin-top: 10px;">
+            <button class="btn btn-default dropdown-toggle currencySelectBtn" type="button" data-toggle="dropdown">
+              Currency : <span class="currencyName">{{ $currency->name }}</span>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu currencySelect">
+              @foreach($currencyList as $currencyItem)
+                <li class="listItem 
+                    {{ $currencyItem->id == $currency->id ? 'active' : '' }}"
+                    data-rel="{{ $currencyItem->id }}">
+                  <a href="#">{{ $currencyItem->name }}</a>
+                </li>
+              @endforeach
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-3">
-       @include('admin.common.currency_menu')
+    <div class="col-md-3">       
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title underline">Transaction Type</h3>
+        </div>
+        <div class="box-body no-padding" style="display: block;">
+          <ul class="nav nav-pills nav-stacked">
+            @foreach($transactionTypeList as $transactionTypeItem)
+              <li {{ isset($list_menu) &&  $list_menu == $transactionTypeItem->slug ? 'class=active' : ''}}>
+                <a data-spinner="true" href="{{ url('admin/settings/feeslimit/'.$transactionTypeItem->slug.'/'.$subscription->id.'/'.$currency->id) }}">
+                  {{ $transactionTypeItem->name }}
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="col-md-9">
       <div class="box box-info">
         <div class="box-header with-border text-center">
-          <h3 class="box-title">
-
-            @if($list_menu == 'request_payment')
-              {{ ucwords(str_replace('_', ' ', $list_menu)) }} Settings
-            @elseif($list_menu == 'withdrawal')
-              {{ "Payout Settings" }}
-            @else
-              {{ ucfirst($list_menu) }} Settings
-            @endif
-          </h3>
+          <h3 class="box-title">{{ $transaction_name }} Settings</h3>
         </div>
 
         <form action='{{url('admin/settings/feeslimit/update-deposit-limit')}}' class="form-horizontal" method="POST" id="deposit_limit_form">
           {!! csrf_field() !!}
 
           <input type="hidden" value="{{ $currency->id }}" name="currency_id" id="currency_id">
-          <input type="hidden" value="{{ $transaction_type }}" name="transaction_type" id="transaction_type">
+          <input type="hidden" value="{{ $transaction_type }}" name="transaction_type_id" id="transaction_type_id">
+          <input type="hidden" value="{{ $trans_type }}" name="transaction_type" id="transaction_type">
           <input type="hidden" value="{{ $list_menu }}" name="tabText" id="tabText">
-
           <input type="hidden" value="{{ $currency->default }}" name="defaultCurrency" id="defaultCurrency">
+          <input type="hidden" value="{{ $subscription->id }}" name="subscription_id" id="subscription_id">
 
           <div class="box-body">
-
             <div class="col-md-11 col-md-offset-1">
               <div class="panel-group" id="accordion">
                 @foreach($payment_methods as $key=>$method)
-                    <input type="hidden" name="payment_method_id[]" value="{{ $method->id }}">
-                    <div class="panel panel-default">
+                  <input type="hidden" name="payment_method_id[]" value="{{ $method->id }}">
+                  <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $method->id }}">
-                        {{ isset($method->name) && $method->name == 'Plaid' ? 'ACH' : $method->name }}</a>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $method->id }}"> {{ $method->name }} </a>
                       </h4>
                     </div>
                     <div id="collapse{{ $method->id }}" class="panel-collapse collapse">
-                      <div class="panel-body">
+                      <div class="panel-body fee-form" data-method_id="{{ $method->id }}">
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label default_currency_label" for="has_transaction_{{ $method->id }}">Is Activated</label>
+                          <div class="col-sm-5">
+                            <label class="checkbox-container">
+                              <input 
+                                type="checkbox" 
+                                class="has_transaction" 
+                                data-method_id="{{ $method->id }}" 
+                                name="has_transaction[{{ $method->id }}]" 
+                                value="Yes" 
+                                id="has_transaction_{{ $method->id }}"
+                                @if ($currency->default == 1)
+                                    checked disabled
+                                @elseif (isset($method->fees_limit->has_transaction) && $method->fees_limit->has_transaction == "Yes")
+                                    checked
+                                @endif
+                              >
+                              <span class="checkmark"></span>
+                            </label>
 
-                          <!-- has_transaction -->
+                            @if ($errors->has("has_transaction.{$method->id}"))
+                              <span class="help-block">
+                                <strong>{{ $errors->first("has_transaction.{$method->id}") }}</strong>
+                              </span>
+                            @endif
+                          </div>
+
+                          <div class="col-sm-4">
+                            @if ($currency->default == 1)
+                              <p><span class="default_currency_side_text">Default currency is always active</span></p>
+                            @endif
+                          </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        @if($trans_type == 1)
+                          <div class="form-group">
+                            <label class="col-sm-3 control-label" for="min_balance">Minimum Balance</label>
+                            <div class="col-sm-5">
+                              <input class="form-control min_balance" name="min_balance[]" type="text" value="{{ isset($method->fees_limit->min_balance) ? number_format((float)$method->fees_limit->min_balance, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="min_balance_{{ $method->id }}">
+                              <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                              @if ($errors->has('min_balance'))
+                                <span class="help-block">
+                                  <strong>{{ $errors->first('min_balance') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                            <div class="col-sm-4">
+                              <p>If not set, minimum balance is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+
+                          <h4><strong>Limit 1</strong></h4>
+                          <div class="charge-range border p-3">
                             <div class="form-group">
-                              <label class="col-sm-3 control-label default_currency_label" for="has_transaction">Is Activated</label>
+                              <label class="col-sm-3 control-label" for="min_limit">Minimum Limit</label>
                               <div class="col-sm-5">
-                                    <label class="checkbox-container">
-                                    <input type="checkbox" class="has_transaction" data-method_id="{{ $method->id }}" name="has_transaction[{{ $method->id}}]" value="Yes" {{ isset($method->fees_limit->has_transaction) && $method->fees_limit->has_transaction == 'Yes' ? 'checked' : '' }} {{ $currency->default == 1 ? 'disabled="disabled"' : ' ' }} id="has_transaction_{{ $method->id }}">
-                                    <span class="checkmark"></span>
-                                    </label>
-
-                                  @if ($errors->has('has_transaction'))
-                                      <span class="help-block">
-                                          <strong>{{ $errors->first('has_transaction') }}</strong>
-                                      </span>
-                                  @endif
-                             </div>
-                             <div class="col-sm-4">
-                                  <p><span class="default_currency_side_text">Default currency is always active</span></p>
+                                <input class="form-control min_limit" name="min_limit[]" type="text" value="{{ isset($method->fees_limit->min_limit) ? number_format((float)$method->fees_limit->min_limit, $preference['decimal_format_amount'], '.', '') : number_format((float)1.00000000, $preference['decimal_format_amount'], '.', '') }}" id="min_limit_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('min_limit'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('min_limit') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, minimum limit is {{ number_format((float)1.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
                               </div>
                             </div>
                             <div class="clearfix"></div>
 
-                           <!-- Minimum Limit -->
+                            <div class="form-group">
+                              <label class="col-sm-3 control-label" for="max_limit">Maximum Limit</label>
+                              <div class="col-sm-5">
+                                <input class="form-control max_limit" name="max_limit[]" type="text" value="{{ isset($method->fees_limit->max_limit) ? number_format((float)$method->fees_limit->max_limit, $preference['decimal_format_amount'], '.', '') : '' }}" id="max_limit_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('max_limit'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('max_limit') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, maximum limit is infinity</p>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                              <label class="col-sm-3 control-label" for="charge_percentage">Charge Percentage</label>
+                              <div class="col-sm-5">
+                                <input class="form-control charge_percentage" name="charge_percentage[]" type="text" value="{{ isset($method->fees_limit->charge_percentage) ? number_format((float)$method->fees_limit->charge_percentage, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="charge_percentage_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('charge_percentage'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('charge_percentage') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, charge percentage is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                              <label class="col-sm-3 control-label" for="charge_fixed">Charge Fixed</label>
+                              <div class="col-sm-5">
+                                <input class="form-control charge_fixed" name="charge_fixed[]" type="text" value="{{ isset($method->fees_limit->charge_fixed) ? number_format((float)$method->fees_limit->charge_fixed, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="charge_fixed_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('charge_fixed'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('charge_fixed') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, charge fixed is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+
+                          <h4><strong>Limit 2</strong></h4>
+                          <div class="charge-range border p-3">
+                            <div class="form-group">
+                              <label class="col-sm-3 control-label" for="second_min_limit">Minimum Limit</label>
+                              <div class="col-sm-5">
+                                <input class="form-control second_min_limit" name="second_min_limit[]" type="text" value="{{ isset($method->fees_limit->second_min_limit) ? number_format((float)$method->fees_limit->second_min_limit, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="second_min_limit_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('second_min_limit'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('second_min_limit') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, minimum limit is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                              <label class="col-sm-3 control-label" for="second_max_limit">Maximum Limit</label>
+                              <div class="col-sm-5">
+                                <input class="form-control second_max_limit" name="second_max_limit[]" type="text" value="{{ isset($method->fees_limit->second_max_limit) ? number_format((float)$method->fees_limit->second_max_limit, $preference['decimal_format_amount'], '.', '') : '' }}" id="second_max_limit_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('second_max_limit'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('second_max_limit') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, maximum limit is infinity</p>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                              <label class="col-sm-3 control-label" for="second_charge_percentage">Charge Percentage</label>
+                              <div class="col-sm-5">
+                                <input class="form-control second_charge_percentage" name="second_charge_percentage[]" type="text" value="{{ isset($method->fees_limit->second_charge_percentage) ? number_format((float)$method->fees_limit->second_charge_percentage, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="second_charge_percentage_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('second_charge_percentage'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('second_charge_percentage') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, charge percentage is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                              <label class="col-sm-3 control-label" for="second_charge_fixed">Charge Fixed</label>
+                              <div class="col-sm-5">
+                                <input class="form-control second_charge_fixed" name="second_charge_fixed[]" type="text" value="{{ isset($method->fees_limit->second_charge_fixed) ? number_format((float)$method->fees_limit->second_charge_fixed, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="second_charge_fixed_{{ $method->id }}">
+                                <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                                @if ($errors->has('second_charge_fixed'))
+                                  <span class="help-block">
+                                    <strong>{{ $errors->first('second_charge_fixed') }}</strong>
+                                  </span>
+                                @endif
+                              </div>
+                              <div class="col-sm-4">
+                                <p>If not set, charge fixed is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                            
                           <div class="form-group">
-                                <label class="col-sm-3 control-label" for="min_limit">Minimum Limit</label>
-                                <div class="col-sm-5">
-                                  <input class="form-control min_limit" name="min_limit[]" type="text"
-                                  value="{{ isset($method->fees_limit->min_limit) ? number_format((float)$method->fees_limit->min_limit, $preference['decimal_format_amount'], '.', '') :
-                                  number_format((float)1.00000000, $preference['decimal_format_amount'], '.', '') }}"
-
-                                  id="min_limit_{{ $method->id }}" {{ isset($method->fees_limit->has_transaction) && $method->fees_limit->has_transaction == 'Yes' ? '' : 'readonly' }}
-                                  oninput="restrictNumberToPrefdecimal(this)">
-
-                                  <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
-                                  @if ($errors->has('min_limit'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('min_limit') }}</strong>
-                                        </span>
-                                  @endif
-                                </div>
-                                <div class="col-sm-4">
-                                  <p>If not set, minimum limit is {{ number_format((float)1.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
-                                </div>
+                            <label class="col-sm-3 control-label" for="recom_amt">Recommended Amount</label>
+                            <div class="col-sm-5">
+                              <input class="form-control recom_amt" name="recom_amt[]" type="text" value="{{$method->fees_limit->recom_amt??'0'}}" id="recom_amt_{{ $method->id }}"  oninput="restrictNumberToPrefdecimal(this)">
+                              <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                              @if ($errors->has('recom_amt'))
+                                <span class="help-block">
+                                  <strong>{{ $errors->first('recom_amt') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                            <div class="col-sm-4">
+                              <p>Add Recommended Amount , Comma Seprated!</p>
+                            </div>
                           </div>
                           <div class="clearfix"></div>
 
-                          <!-- Maximum Limit -->
                           <div class="form-group">
-                                <label class="col-sm-3 control-label" for="max_limit">Maximum Limit</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control max_limit" name="max_limit[]" type="text"
-                                    value="{{ isset($method->fees_limit->max_limit) ? number_format((float)$method->fees_limit->max_limit, $preference['decimal_format_amount'], '.', '') : '' }}"
-
-                                    id="max_limit_{{ $method->id }}" {{ isset($method->fees_limit->has_transaction) && $method->fees_limit->has_transaction == 'Yes' ? '' : 'readonly' }} oninput="restrictNumberToPrefdecimal(this)">
-                                    <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
-                                    @if ($errors->has('max_limit'))
-                                          <span class="help-block">
-                                              <strong>{{ $errors->first('max_limit') }}</strong>
-                                          </span>
-                                    @endif
-                                </div>
-                                <div class="col-sm-4">
-                                  <p>If not set, maximum limit is infinity</p>
-                                </div>
+                            <label class="col-sm-3 control-label" for="description">Description</label>
+                            <div class="col-sm-5">
+                              <textarea class="form-control description" name="description[]" id="description_{{ $method->id }}">{{$method->fees_limit->description??''}}</textarea>
+                              @if ($errors->has('description'))
+                                <span class="help-block">
+                                  <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
+                        @else                         
+                          <div class="form-group">
+                            <label class="col-sm-3 control-label" for="card_limit">Card Limit</label>
+                            <div class="col-sm-5">
+                              <input class="form-control card_limit" name="card_limit[]" type="text" value="{{$method->fees_limit->card_limit??'1'}}" id="card_limit_{{ $method->id }}"  oninput="restrictNumberToPrefdecimal(this)">
+                              @if ($errors->has('card_limit'))
+                                <span class="help-block">
+                                  <strong>{{ $errors->first('card_limit') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                            <div class="col-sm-4">
+                              <p>If not set, card limit is 1</p>
+                            </div>
                           </div>
                           <div class="clearfix"></div>
 
-                          <!-- Charge Percentage -->
                           <div class="form-group">
-                                <label class="col-sm-3 control-label" for="charge_percentage">Charge Percentage</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control charge_percentage" name="charge_percentage[]" type="text"
-                                    value="{{ isset($method->fees_limit->charge_percentage) ? number_format((float)$method->fees_limit->charge_percentage, $preference['decimal_format_amount'], '.', '') :
-                                    number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}"
-
-                                    id="charge_percentage_{{ $method->id }}" {{ isset($method->fees_limit->has_transaction) && $method->fees_limit->has_transaction == 'Yes' ? '' : 'readonly' }} oninput="restrictNumberToPrefdecimal(this)">
-                                    <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
-                                    @if ($errors->has('charge_percentage'))
-                                          <span class="help-block">
-                                              <strong>{{ $errors->first('charge_percentage') }}</strong>
-                                          </span>
-                                    @endif
-                                </div>
-                                <div class="col-sm-4">
-                                  <p>If not set, charge percentage is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
-                                </div>
+                            <label class="col-sm-3 control-label" for="charge_percentage">Charge Percentage</label>
+                            <div class="col-sm-5">
+                              <input class="form-control charge_percentage" name="charge_percentage[]" type="text" value="{{ isset($method->fees_limit->charge_percentage) ? number_format((float)$method->fees_limit->charge_percentage, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="charge_percentage_{{ $method->id }}">
+                              <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                              @if ($errors->has('charge_percentage'))
+                                <span class="help-block">
+                                  <strong>{{ $errors->first('charge_percentage') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                            <div class="col-sm-4">
+                              <p>If not set, charge percentage is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                            </div>
                           </div>
                           <div class="clearfix"></div>
 
-                          <!-- Charge Fixed -->
                           <div class="form-group">
-                                <label class="col-sm-3 control-label" for="charge_fixed">Charge Fixed</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control charge_fixed" name="charge_fixed[]" type="text"
-                                    value="{{ isset($method->fees_limit->charge_fixed) ? number_format((float)$method->fees_limit->charge_fixed, $preference['decimal_format_amount'], '.', '') :
-                                    number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}"
+                            <label class="col-sm-3 control-label" for="charge_fixed">Charge Fixed</label>
+                            <div class="col-sm-5">
+                              <input class="form-control charge_fixed" name="charge_fixed[]" type="text" value="{{ isset($method->fees_limit->charge_fixed) ? number_format((float)$method->fees_limit->charge_fixed, $preference['decimal_format_amount'], '.', '') : number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}" id="charge_fixed_{{ $method->id }}">
+                              <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
+                              @if ($errors->has('charge_fixed'))
+                                <span class="help-block">
+                                  <strong>{{ $errors->first('charge_fixed') }}</strong>
+                                </span>
+                              @endif
+                            </div>
+                            <div class="col-sm-4">
+                              <p>If not set, charge fixed is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
+                            </div>
+                          </div>
+                          <div class="clearfix"></div>
 
-                                    id="charge_fixed_{{ $method->id }}" {{ isset($method->fees_limit->has_transaction) && $method->fees_limit->has_transaction == 'Yes' ? '' : 'readonly' }} oninput="restrictNumberToPrefdecimal(this)">
-                                    <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
-                                    @if ($errors->has('charge_fixed'))
-                                          <span class="help-block">
-                                              <strong>{{ $errors->first('charge_fixed') }}</strong>
-                                          </span>
-                                    @endif
-                                </div>
-                                <div class="col-sm-4">
-                                  <p>If not set, charge fixed is {{ number_format((float)0.00000000, $preference['decimal_format_amount'], '.', '') }}</p>
-                                </div>
-                          </div>
-                          <div class="clearfix"></div>
-                          
-                          <!-- Recommended Amount -->
                           <div class="form-group">
-                                <label class="col-sm-3 control-label" for="charge_fixed">Recommended Amount</label>
-                                <div class="col-sm-5">
-                                    <input class="form-control recom_amt" name="recom_amt[]" type="text"
-                                    value="{{$method->fees_limit->recom_amt??'0'}}"
-                                    id="recom_amt_{{ $method->id??'0' }}"  oninput="restrictNumberToPrefdecimal(this)">
-                                    <small class="form-text text-muted"><strong>{{ allowedDecimalPlaceMessage($preference['decimal_format_amount']) }}</strong></small>
-                                    @if ($errors->has('recom_amt'))
-                                          <span class="help-block">
-                                              <strong>{{ $errors->first('recom_amt') }}</strong>
-                                          </span>
-                                    @endif
-                                </div>
-                                <div class="col-sm-4">
-                                  <p>Add Recommended Amount , Comma Seprated!</p>
-                                </div>
+                            <label class="col-sm-3 control-label" for="description">Description</label>
+                            <div class="col-sm-5">
+                              <textarea class="form-control description" name="description[]" id="description_{{ $method->id }}">{{$method->fees_limit->description??''}}</textarea>
+                              @if ($errors->has('description'))
+                                <span class="help-block">
+                                  <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                              @endif
+                            </div>
                           </div>
                           <div class="clearfix"></div>
+                        @endif
                       </div>
                     </div>
-                    </div>
-
+                  </div>
                 @endforeach
               </div>
             </div>
           </div>
 
           <div class="box-footer">
-              <a href="{{ url("admin/settings/currency") }}" class="btn btn-danger btn-flat">Cancel</a>
-              <button type="submit" class="btn btn-primary btn-flat pull-right" id="deposit_limit_update">
-                  <i class="fa fa-spinner fa-spin" style="display: none;"></i> <span id="deposit_limit_update_text">Update</span>
-              </button>
+            <a href="{{ url("admin/settings/currency") }}" class="btn btn-danger btn-flat">Cancel</a>
+            <button type="submit" class="btn btn-primary btn-flat pull-right" id="deposit_limit_update">
+              <i class="fa fa-spinner fa-spin" style="display: none;"></i> <span id="deposit_limit_update_text">Update</span>
+            </button>
           </div>
         </form>
-
       </div>
     </div>
   </div>
-@endsection
 
-@push('extra_body_scripts')
-
-<!-- jquery.validate -->
-<script src="{{ asset('public/dist/js/jquery.validate.min.js') }}" type="text/javascript"></script>
-
-@include('common.restrict_number_to_pref_decimal')
-
-@include('common.format_number_to_pref_decimal')
-
-<script type="text/javascript">
-
-  if ($('#defaultCurrency').val() == 1)
-  {
-      $('.defaultCurrencyDiv').show();
-  }
-  else
-  {
-      $('.defaultCurrencyDiv').hide();
-  }
-
-  $('#deposit_limit_form').validate(
-  {
-      rules:
-      {
-          min_limit:
-          {
-              number: true,
-          },
-          max_limit:
-          {
-              number: true,
-          },
-          charge_percentage:
-          {
-              number: true,
-          },
-          charge_fixed:
-          {
-              number: true,
-          },
-          processing_time:
-          {
-              number: true,
-          },
-      },
-      submitHandler: function(form)
-      {
-          $("#deposit_limit_update").attr("disabled", true);
-          $(".fa-spin").show();
-          $("#deposit_limit_update_text").text('Updating...');
-          form.submit();
-      }
-  });
-
-  $(".has_transaction").click(function()
-  {
-      var payment_method_id = $(this).data('method_id');
-      if ($('#has_transaction_' + payment_method_id).prop('checked') == true)
-      {
-          $('#has_transaction_' + payment_method_id).val('Yes')
-          $('#min_limit_' + payment_method_id).prop("readonly", false);
-          $('#max_limit_' + payment_method_id).prop("readonly", false);
-          $('#charge_percentage_' + payment_method_id).prop("readonly", false);
-          $('#charge_fixed_' + payment_method_id).prop("readonly", false);
-      }
-      else
-      {
-          $('#has_transaction_' + payment_method_id).val('')
-          $('#min_limit_' + payment_method_id).prop("readonly", true);
-          $('#max_limit_' + payment_method_id).prop("readonly", true);
-          $('#charge_percentage_' + payment_method_id).prop("readonly", true);
-          $('#charge_fixed_' + payment_method_id).prop("readonly", true);
-      }
-  });
-
-  //on load
-  $(window).on('load', function()
-  {
-      var previousUrl = document.referrer;
-      var urlByOwn = SITE_URL + '/admin/settings/currency';
-      if (previousUrl == urlByOwn)
-      {
-          localStorage.removeItem('currencyId');
-          localStorage.removeItem('currencyName');
-          localStorage.removeItem('defaultCurrency');
-      }
-      else
-      {
-          if ((localStorage.getItem('currencyName')) && (localStorage.getItem('currencyId')) && (localStorage.getItem('defaultCurrency')))
-          {
-              $('.currencyName').text(localStorage.getItem('currencyName'));
-              $('#currency_id').val(localStorage.getItem('currencyId'));
-              $('#defaultCurrency').val(localStorage.getItem('defaultCurrency'));
-              getFeesLimitDetails();
-          }
-          else
-          {
-              getSpecificCurrencyDetails();
-          }
-      }
-  });
-
-  //currency dropdown
-  $('.listItem').on('click', function()
-  {
-      var currencyId = $(this).attr('data-rel');
-      var currencyName = $(this).text();
-      var defaultCurrency = $(this).attr('data-default');
-      if (defaultCurrency == 1)
-      {
-          $('.defaultCurrencyDiv').show();
-      }
-      else
-      {
-          $('.defaultCurrencyDiv').hide();
-      }
-      localStorage.setItem('currencyId', currencyId);
-      localStorage.setItem('currencyName', currencyName);
-      localStorage.setItem('defaultCurrency', defaultCurrency);
-      $('.currencyName').text(currencyName);
-      $('#currency_id').val(currencyId);
-      $('#defaultCurrency').val(defaultCurrency);
-      getFeesLimitDetails();
-  });
-
-  //Window on load/click on list item get fees limit details
-  function getFeesLimitDetails()
-  {
-      var currencyId = $('#currency_id').val();
-      var checkDefaultCurrency = $('#defaultCurrency').val();
-      var tabText = $('#tabText').val();
-      var transaction_type = $('#transaction_type').val();
-      var token = $("input[name=_token]").val();
-      var url = SITE_URL + '/admin/settings/get-feeslimit-details';
-      $.ajax(
-      {
-          url: url,
-          type: "post",
-          data:
-          {
-              'currency_id': currencyId,
-              'transaction_type': transaction_type,
-              '_token': token
-          },
-          dataType: 'json',
-          success: function(data)
-          {
-              if (data.status == 200)
-              {
-                  var feesLimt = data.feeslimit;
-                  if (checkDefaultCurrency == 1)
-                  {
-                      $('.defaultCurrencyDiv').show();
-                      $('.default_currency_label').html('Is Activated');
-                      $('.default_currency_side_text').text('Default currency is always active');
-                      $(".has_transaction").prop('checked', true);
-                      $(".has_transaction").prop('disabled', true);
-                      $('.has_transaction').val('Yes');
-                  }
-                  else
-                  {
-                      $('.defaultCurrencyDiv').hide();
-                      $('.default_currency_label').html('Is Activated');
-                      $('.default_currency_side_text').text('');
-                      $(".has_transaction").prop('checked', false);
-                      $('.has_transaction').removeAttr('disabled');
-                      $('.has_transaction').val('');
-                  }
-
-                  $.each(feesLimt, function(key, value)
-                  {
-                      // console.log(feesLimt);
-                      if (value.fees_limit != null)
-                      {
-                          $('#min_limit_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.min_limit));
-                          if (value.fees_limit.max_limit != null)
-                          {
-                              $('#max_limit_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.max_limit));
-                          }
-                          else
-                          {
-                              $('#max_limit_' + value.id).val('');
-                          }
-                          $('#charge_percentage_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.charge_percentage));
-                          $('#charge_fixed_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.charge_fixed));
-
-                          $('#has_transaction_' + value.id).val(value.fees_limit.has_transaction);
-                          if (value.fees_limit.has_transaction == 'Yes')
-                          {
-                              $('#has_transaction_' + value.id).prop('checked', true);
-                              $('#min_limit_' + value.id).prop("readonly", false);
-                              $('#max_limit_' + value.id).prop("readonly", false);
-                              $('#charge_percentage_' + value.id).prop("readonly", false);
-                              $('#charge_fixed_' + value.id).prop("readonly", false);
-                          }
-                          else
-                          {
-                              $('#has_transaction_' + value.id).prop('checked', false);
-                              $('#min_limit_' + value.id).prop("readonly", true);
-                              $('#max_limit_' + value.id).prop("readonly", true);
-                              $('#charge_percentage_' + value.id).prop("readonly", true);
-                              $('#charge_fixed_' + value.id).prop("readonly", true);
-                          }
-                      }
-                      else
-                      {
-                          $('#min_limit_' + value.id).val(formatNumberToPrefDecimal('1.00000000'));
-                          $('#max_limit_' + value.id).val('');
-                          $('#charge_percentage_' + value.id).val(formatNumberToPrefDecimal('0.00000000'));
-                          $('#charge_fixed_' + value.id).val(formatNumberToPrefDecimal('0.00000000'));
-                          $('#has_transaction_' + value.id).prop('checked', false);
-                          $('#min_limit_' + value.id).prop("readonly", true);
-                          $('#max_limit_' + value.id).prop("readonly", true);
-                          $('#charge_percentage_' + value.id).prop("readonly", true);
-                          $('#charge_fixed_' + value.id).prop("readonly", true);
-                      }
-                  });
-              }
-          },
-          error: function(error)
-          {
-              console.log(error);
-          }
-      });
-  }
-
-  // Get Specific Currency Details
-  function getSpecificCurrencyDetails()
-  {
-      var currencyId       = $('#currency_id').val();
-      var checkDefaultCurrency = $('#defaultCurrency').val();
-      var transaction_type = $('#transaction_type').val();
-      var token            = $("input[name=_token]").val();
-      var tabText = $('#tabText').val();
-      var url              = SITE_URL+'/admin/settings/get-specific-currency-details';
-      $.ajax({
-        url : url,
-        type : "post",
-        data : {
-          'currency_id':currencyId,
-          'transaction_type':transaction_type,
-          '_token':token
-        },
-        dataType : 'json',
-        success:function(data)
-        {
-          if(data.status == 200)
-          {
-            var feesLimt = data.feeslimit;
-            if (checkDefaultCurrency == 1)
-            {
-              $('.defaultCurrencyDiv').show();
-              $('.default_currency_label').html('Is Activated');
-              $('.default_currency_side_text').text('Default currency is always active');
-              $(".has_transaction").prop('checked', true);
-              $('#has_transaction').attr('disabled', true);
-              $('#has_transaction').val('Yes');
-              $("#min_limit").prop("readonly", false);
-              $("#max_limit").prop("readonly", false);
-              $("#charge_percentage").prop("readonly", false);
-              $("#charge_fixed").prop("readonly", false);
-            }
-            else
-            {
-              $('.defaultCurrencyDiv').hide();
-              $('.default_currency_label').html('Is Activated');
-              $('.default_currency_side_text').hide();
-              $("#has_transaction").prop('checked', false);
-              $('#has_transaction').removeAttr('disabled');
-              $('.has_transaction').val('No');
-              $("#min_limit").prop("readonly", true);
-              $("#max_limit").prop("readonly", true);
-              $("#charge_percentage").prop("readonly", true);
-              $("#charge_fixed").prop("readonly", true);
-            }
-            $.each(feesLimt, function(key, value)
-            {
-                // console.log(feesLimt);
-                if (value.fees_limit != null)
-                {
-                    $('#min_limit_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.min_limit));
-                    if (value.fees_limit.max_limit != null)
-                    {
-                        $('#max_limit_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.max_limit));
-                    }
-                    else
-                    {
-                        $('#max_limit_' + value.id).val('');
-                    }
-                    $('#charge_percentage_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.charge_percentage));
-                    $('#charge_fixed_' + value.id).val(formatNumberToPrefDecimal(value.fees_limit.charge_fixed));
-
-                    $('#has_transaction_' + value.id).val(value.fees_limit.has_transaction);
-                    if (value.fees_limit.has_transaction == 'Yes')
-                    {
-                        $('#has_transaction_' + value.id).prop('checked', true);
-                        $('#min_limit_' + value.id).prop("readonly", false);
-                        $('#max_limit_' + value.id).prop("readonly", false);
-                        $('#charge_percentage_' + value.id).prop("readonly", false);
-                        $('#charge_fixed_' + value.id).prop("readonly", false);
-                    }
-                    else
-                    {
-                        $('#has_transaction_' + value.id).prop('checked', false);
-                        $('#min_limit_' + value.id).prop("readonly", true);
-                        $('#max_limit_' + value.id).prop("readonly", true);
-                        $('#charge_percentage_' + value.id).prop("readonly", true);
-                        $('#charge_fixed_' + value.id).prop("readonly", true);
-                    }
-                }
-                else
-                {
-                    $('#min_limit_' + value.id).val(formatNumberToPrefDecimal('1.00000000'));
-                    $('#max_limit_' + value.id).val('');
-                    $('#charge_percentage_' + value.id).val(formatNumberToPrefDecimal('0.00000000'));
-                    $('#charge_fixed_' + value.id).val(formatNumberToPrefDecimal('0.00000000'));
-
-                    $('#has_transaction_' + value.id).prop('checked', false);
-                    $('#min_limit_' + value.id).prop("readonly", true);
-                    $('#max_limit_' + value.id).prop("readonly", true);
-                    $('#charge_percentage_' + value.id).prop("readonly", true);
-                    $('#charge_fixed_' + value.id).prop("readonly", true);
-                }
-            });
-          }
-          else
-          {
-            if (checkDefaultCurrency == 1)
-            {
-              $('.defaultCurrencyDiv').show();
-              $('.default_currency_label').html('Is Activated');
-              $('.default_currency_side_text').text('Default currency is always active');
-              $('#has_transaction').removeAttr('disabled');
-            }
-            else
-            {
-              $('.defaultCurrencyDiv').hide();
-              $('.default_currency_label').html('Is Activated');
-              $('.default_currency_side_text').text('');
-            }
-            $('#id').val('');
-            $('.currencyName').text(data.currency.name);
-            $('#currency_id').val(data.currency.id);
-            $(".has_transaction").prop('checked', false);
-            $('.has_transaction').val('No');
-            $('.min_limit').val('1.00000000');
-            $('.max_limit').val('');
-            $('.charge_percentage').val('0');
-            $('.charge_fixed').val('0');
-          }
-        },
-        error: function(error){
-            console.log(error);
+  <script>
+    $(document).ready(function () {
+      $('.subscriptionSelect .listItem').each(function () {
+        if ($(this).data('default') == 1) {
+          $(this).addClass('active');
         }
       });
-  }
 
-</script>
+      $('.currencySelect .listItem').each(function () {
+        if ($(this).data('default') == 1) {
+          $(this).addClass('active');
+        }
+      });
 
-@endpush
+      $(document).on('click', '.subscriptionSelect .listItem', function (e) {
+        e.preventDefault();
+        let subscriptionId = $(this).data('rel');
+        let title = $(this).text();
+        $('.SubscriptionTitle').text(title);
+        $(this).addClass('active').siblings().removeClass('active');
+        $('#subscription_id').val(subscriptionId);
+        let currencyId = $('.currencySelect .listItem.active').data('rel') || 0;
+        loadFees(subscriptionId, currencyId, $('#transaction_type').val(), $('#transaction_type_id').val(), $('#tabText').val());
+      });
 
+      $(document).on('click', '.currencySelect .listItem', function (e) {
+        e.preventDefault();
+        let currencyId = $(this).data('rel');
+        let name = $(this).text();
+        $('.currencyName').text(name);
+        $(this).addClass('active').siblings().removeClass('active');
+        $('#currency_id').val(currencyId);
+        let subscriptionId = $('.subscriptionSelect .listItem.active').data('rel') || 0;
+        loadFees(subscriptionId, currencyId, $('#transaction_type').val(), $('#transaction_type_id').val(), $('#tabText').val());
+      });
+
+      function loadFees(subscriptionId, currencyId, transactionType, transactionTypeId, tabText) {
+        $.ajax({
+          url: "{{ route('settings.feesLimitDetails') }}",
+          type: "POST",
+          data: {
+            subscription_id: subscriptionId,
+            currency_id: currencyId,
+            transaction_type: transactionType,
+            transaction_type_id: transactionTypeId,
+            tab: tabText,
+            _token: $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function (response) {
+            if (response.status === 200) {
+              $('.fee-form').each(function () {
+                let methodId = $(this).data('method_id');
+                let fee = response.feeslimit[methodId];
+
+                if (fee) {
+                  $(this).find('.min_balance').val(fee.min_balance);
+                  $(this).find('.min_limit').val(fee.min_limit);
+                  $(this).find('.max_limit').val(fee.max_limit);
+                  $(this).find('.charge_percentage').val(fee.charge_percentage);
+                  $(this).find('.charge_fixed').val(fee.charge_fixed);
+                  $(this).find('.second_min_limit').val(fee.second_min_limit);
+                  $(this).find('.second_max_limit').val(fee.second_max_limit);
+                  $(this).find('.second_charge_percentage').val(fee.second_charge_percentage);
+                  $(this).find('.second_charge_fixed').val(fee.second_charge_fixed);
+                  $(this).find('.recom_amt').val(fee.recom_amt);
+                  $(this).find('.description').val(fee.description);
+                  $(this).find('.card_limit').val(fee.card_limit);
+                } else {
+                  $(this).find('input, textarea, select').val('');
+                }
+              });
+            } else {
+              $('.fee-form').each(function () {
+                $(this).find('input, textarea, select').val('');
+              });
+            }
+          },
+          error: function () {
+            alert("Failed to load fees data.");
+          }
+        });
+      }
+
+      function setDefaultHiddenInputs() {
+        let subscriptionId = $('.subscriptionSelect .listItem.active').data('rel');
+        let currencyId = $('.currencySelect .listItem.active').data('rel');
+        if (subscriptionId) $('#subscription_id').val(subscriptionId);
+        if (currencyId) $('#currency_id').val(currencyId);
+      }
+      setDefaultHiddenInputs();
+    });
+  </script>
+@endsection

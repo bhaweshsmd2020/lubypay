@@ -10,13 +10,22 @@ class FeesLimit extends Model
     protected $fillable = [
         'currency_id',
         'transaction_type_id',
+        'transaction_type',
         'payment_method_id',
-        'charge_percentage',
-        'charge_fixed',
+        'subscription_id',
+        'min_balance',
+        'has_transaction',
+        'recom_amt',
+        'description',      
         'min_limit',
         'max_limit',
-        'processing_time',
-        'has_transaction',
+        'charge_percentage',
+        'charge_fixed',
+        'second_min_limit',
+        'second_max_limit',
+        'second_charge_percentage',
+        'second_charge_fixed',
+        'card_limit',
     ];
 
     public function currency()
