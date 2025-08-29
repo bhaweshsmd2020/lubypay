@@ -67,7 +67,7 @@ Route::group(['middleware' => ['guest:users', 'locale', 'twoFa', 'check-user-ina
 
 
     Route::get('dashboard', 'CustomerController@dashboard');
-
+    Route::get('comissions', 'CustomerController@comissions');
 
 
 /*Cable TV */
