@@ -33,25 +33,29 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-3">
-			@include('admin.common.paymentMethod_menu')
-		</div>
+		<div class="col-md-3">	
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title underline">Payment Methods</h3>
+				</div>
+				<div class="box-body no-padding" style="display: block;">
+					<ul class="nav nav-pills nav-stacked">
+						@foreach($paymentMethodList as $paymentMethodItem)
+							<li {{ isset($list_menu) && $list_menu == $paymentMethodItem->slug ? 'class=active' : '' }}>
+								<a data-spinner="true" href="{{ url('admin/settings/payment-methods/'.$paymentMethodItem->slug.'/'.$currency->id) }}">
+									{{ $paymentMethodItem->name }}
+								</a>
+							</li>
+						@endforeach
+					</ul>
+				</div>
+			</div>
+        </div>
 
 		<div class="col-md-9">
 			<div class="box box-info">
 				<div class="box-header with-border text-center">
-					<h3 class="box-title">
-						@if($list_menu == 'twoCheckout'){{ ucwords(str_replace('two', '2', $list_menu)) }} Settings
-						@elseif($list_menu == 'bank')
-						@elseif($list_menu == 'cash')
-						{{ "Cash Payment" }} Settings
-						@elseif($list_menu == 'braintree')
-						{{ "Braintree Payment" }} Settings
-						@elseif($list_menu == 'mobile')
-						{{ "Mobile Payment" }} Settings
-						@else{{ ucfirst($list_menu) }} Settings
-						@endif
-					</h3>
+					<h3 class="box-title">{{ ucwords($list_menu) }} Settings</h3>
 				</div>
 
 				<form action='{{url('admin/settings/payment-methods/update-paymentMethod-Credentials')}}' class="form-horizontal" method="POST" id="currencyPaymentMethod_form">
@@ -648,15 +652,15 @@
 									<i class="fa fa-spinner fa-spin" style="display: none;"></i> <span id="paymentMethodList_update_text">Update</span>
 								</button>
 							</div>
-						@elseif($list_menu == 'plaid')
+						@elseif($list_menu == 'ach')
 							<!-- Stripe - Secret Key -->
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="plaid[plaid_stripe_secret_key]">Stripe Secret Key</label>
+								<label class="col-sm-3 control-label" for="ach[ach_stripe_secret_key]">Stripe Secret Key</label>
 								<div class="col-sm-5">
-									<input class="form-control" name="plaid[plaid_stripe_secret_key]" type="text" placeholder="Stripe Secret Key" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->plaid_stripe_secret_key : '' }}" id="plaid_stripe_secret_key">
-									@if ($errors->has('plaid[plaid_stripe_secret_key]'))
+									<input class="form-control" name="ach[ach_stripe_secret_key]" type="text" placeholder="Stripe Secret Key" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->ach_stripe_secret_key : '' }}" id="ach_stripe_secret_key">
+									@if ($errors->has('ach[ach_stripe_secret_key]'))
     									<span class="help-block">
-    										<strong>{{ $errors->first('plaid[plaid_stripe_secret_key]') }}</strong>
+    										<strong>{{ $errors->first('ach[ach_stripe_secret_key]') }}</strong>
     									</span>
 									@endif
 								</div>
@@ -665,12 +669,12 @@
 
 							<!-- Stripe - Publishable Key -->
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="plaid[plaid_stripe_publishable_key]">Stripe Publishable Key</label>
+								<label class="col-sm-3 control-label" for="ach[ach_stripe_publishable_key]">Stripe Publishable Key</label>
 								<div class="col-sm-5">
-									<input class="form-control" name="plaid[plaid_stripe_publishable_key]" type="text" placeholder="Stripe Publishable Key" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->plaid_stripe_publishable_key : '' }}" id="plaid_stripe_publishable_key">
-									@if ($errors->has('plaid[plaid_stripe_publishable_key]'))
+									<input class="form-control" name="ach[ach_stripe_publishable_key]" type="text" placeholder="Stripe Publishable Key" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->ach_stripe_publishable_key : '' }}" id="ach_stripe_publishable_key">
+									@if ($errors->has('ach[ach_stripe_publishable_key]'))
     									<span class="help-block">
-    										<strong>{{ $errors->first('plaid[plaid_stripe_publishable_key]') }}</strong>
+    										<strong>{{ $errors->first('ach[ach_stripe_publishable_key]') }}</strong>
     									</span>
 									@endif
 								</div>
@@ -678,12 +682,12 @@
 							<div class="clearfix"></div>
 							
 							<div class="form-group">
-                                <label class="col-sm-3 control-label" for="plaid[plaid_stripe_webhook_secret]">Stripe Webhook Secret</label>
+                                <label class="col-sm-3 control-label" for="ach[ach_stripe_webhook_secret]">Stripe Webhook Secret</label>
                                 <div class="col-sm-5">
-                                    <input class="form-control" name="plaid[plaid_stripe_webhook_secret]" type="text" placeholder="Stripe Webhook Secret" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->plaid_stripe_webhook_secret : '' }}" id="plaid_stripe_webhook_secret">
-                                    @if($errors->has('plaid[plaid_stripe_webhook_secret]'))
+                                    <input class="form-control" name="ach[ach_stripe_webhook_secret]" type="text" placeholder="Stripe Webhook Secret" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->ach_stripe_webhook_secret : '' }}" id="ach_stripe_webhook_secret">
+                                    @if($errors->has('ach[ach_stripe_webhook_secret]'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('plaid[plaid_stripe_webhook_secret]') }}</strong>
+                                            <strong>{{ $errors->first('ach[ach_stripe_webhook_secret]') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -691,12 +695,12 @@
                             <div class="clearfix"></div>
 							
 							<div class="form-group">
-                                <label class="col-sm-3 control-label" for="plaid[plaid_base_url]">Plaid Base URL</label>
+                                <label class="col-sm-3 control-label" for="ach[ach_base_url]">ACH Base URL</label>
                                 <div class="col-sm-5">
-                                    <input class="form-control" name="plaid[plaid_base_url]" type="text" placeholder="Plaid Base URL" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->plaid_base_url : '' }}" id="plaid_base_url">
-                                    @if($errors->has('plaid[plaid_base_url]'))
+                                    <input class="form-control" name="ach[ach_base_url]" type="text" placeholder="ACH Base URL" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->ach_base_url : '' }}" id="ach_base_url">
+                                    @if($errors->has('ach[ach_base_url]'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('plaid[plaid_base_url]') }}</strong>
+                                            <strong>{{ $errors->first('ach[ach_base_url]') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -704,12 +708,12 @@
                             <div class="clearfix"></div>
                             
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="plaid[plaid_client_id]">Plaid Client Id</label>
+                                <label class="col-sm-3 control-label" for="ach[ach_client_id]">ACH Client Id</label>
                                 <div class="col-sm-5">
-                                    <input class="form-control" name="plaid[plaid_client_id]" type="text" placeholder="Plaid Client Id" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->plaid_client_id : '' }}" id="plaid_client_id">
-                                    @if($errors->has('plaid[plaid_client_id]'))
+                                    <input class="form-control" name="ach[ach_client_id]" type="text" placeholder="ACH Client Id" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->ach_client_id : '' }}" id="ach_client_id">
+                                    @if($errors->has('ach[ach_client_id]'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('plaid[plaid_client_id]') }}</strong>
+                                            <strong>{{ $errors->first('ach[ach_client_id]') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -717,12 +721,12 @@
                             <div class="clearfix"></div>
                             
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="plaid[plaid_client_secret]">Plaid Client Secret</label>
+                                <label class="col-sm-3 control-label" for="ach[ach_client_secret]">ACH Client Secret</label>
                                 <div class="col-sm-5">
-                                    <input class="form-control" name="plaid[plaid_client_secret]" type="text" placeholder="Plaid Client Secret" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->plaid_client_secret : '' }}" id="plaid_client_secret">
-                                    @if($errors->has('plaid[plaid_client_secret]'))
+                                    <input class="form-control" name="ach[ach_client_secret]" type="text" placeholder="ACH Client Secret" value="{{ isset($currencyPaymentMethod->method_data) ? json_decode($currencyPaymentMethod->method_data)->ach_client_secret : '' }}" id="ach_client_secret">
+                                    @if($errors->has('ach[ach_client_secret]'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('plaid[plaid_client_secret]') }}</strong>
+                                            <strong>{{ $errors->first('ach[ach_client_secret]') }}</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -745,9 +749,9 @@
 
 							<!-- Stripe - Status -->
 							<div class="form-group">
-								<label class="col-sm-3 control-label" for="plaid_status">Status</label>
+								<label class="col-sm-3 control-label" for="ach_status">Status</label>
 								<div class="col-sm-5">
-									<select class="form-control" name="plaid_status" id="plaid_status">
+									<select class="form-control" name="ach_status" id="ach_status">
 										<option value=''>Select Status</option>
 										<option value='Active' {{ isset($currencyPaymentMethod->activated_for) && $currencyPaymentMethod->activated_for == json_encode(['deposit' => '']) ? 'selected':"" }}>Active</option>
 										<option value='Inactive' {{isset($currencyPaymentMethod->activated_for) &&  $currencyPaymentMethod->activated_for == json_encode(['' => '']) ? 'selected':"" }}>Inactive</option>
@@ -1197,25 +1201,25 @@
             braintree_status:{
                required: true,
             },
-            "plaid[plaid_stripe_secret_key]": {
+            "ach[ach_stripe_secret_key]": {
                 required: true,
             },
-            "plaid[plaid_stripe_publishable_key]":{
+            "ach[ach_stripe_publishable_key]":{
               required: true,
             },
-            "plaid[plaid_stripe_webhook_secret]":{
+            "ach[ach_stripe_webhook_secret]":{
               required: true,
             },
-            "plaid[plaid_base_url]":{
+            "ach[ach_base_url]":{
               required: true,
             },
-            "plaid[plaid_client_id]":{
+            "ach[ach_client_id]":{
               required: true,
             },
-            "plaid[plaid_client_secret]":{
+            "ach[ach_client_secret]":{
               required: true,
             },
-            plaid_status:{
+            ach_status:{
                required: true,
             },
         },
@@ -1804,12 +1808,12 @@
 					$('#stripe_secret_key').val(JSON.parse(data.currencyPaymentMethod.method_data).secret_key);
 					$('#stripe_publishable_key').val(JSON.parse(data.currencyPaymentMethod.method_data).publishable_key);
 					
-					$('#plaid_stripe_secret_key').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_stripe_secret_key);
-					$('#plaid_stripe_publishable_key').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_stripe_publishable_key);
-					$('#plaid_stripe_webhook_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_stripe_webhook_secret);
-					$('#plaid_base_url').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_base_url);
-					$('#plaid_client_id').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_client_id);
-					$('#plaid_client_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_client_secret);
+					$('#ach_stripe_secret_key').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_stripe_secret_key);
+					$('#ach_stripe_publishable_key').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_stripe_publishable_key);
+					$('#ach_stripe_webhook_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_stripe_webhook_secret);
+					$('#ach_base_url').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_base_url);
+					$('#ach_client_id').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_client_id);
+					$('#ach_client_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_client_secret);
 
 					$('#paypal_client_id').val(JSON.parse(data.currencyPaymentMethod.method_data).client_id);
 					$('#paypal_client_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).client_secret);
@@ -1870,12 +1874,12 @@
 					$('#stripe_secret_key').val('');
 					$('#stripe_publishable_key').val('');
 					
-					$('#plaid_stripe_secret_key').val('');
-					$('#plaid_stripe_publishable_key').val('');
-					$('#plaid_stripe_webhook_secret').val('');
-					$('#plaid_base_url').val('');
-					$('#plaid_client_id').val('');
-					$('#plaid_client_secret').val('');
+					$('#ach_stripe_secret_key').val('');
+					$('#ach_stripe_publishable_key').val('');
+					$('#ach_stripe_webhook_secret').val('');
+					$('#ach_base_url').val('');
+					$('#ach_client_id').val('');
+					$('#ach_client_secret').val('');
 
 					$('#paypal_client_id').val('');
 					$('#paypal_client_secret').val('');
@@ -1993,12 +1997,12 @@
 					$('#stripe_secret_key').val(JSON.parse(data.currencyPaymentMethod.method_data).secret_key);
 					$('#stripe_publishable_key').val(JSON.parse(data.currencyPaymentMethod.method_data).publishable_key);
 					
-					$('#plaid_stripe_secret_key').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_stripe_secret_key);
-					$('#plaid_stripe_publishable_key').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_stripe_publishable_key);
-					$('#plaid_stripe_webhook_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_stripe_webhook_secret);
-					$('#plaid_base_url').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_base_url);
-					$('#plaid_client_id').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_client_id);
-					$('#plaid_client_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).plaid_client_secret);
+					$('#ach_stripe_secret_key').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_stripe_secret_key);
+					$('#ach_stripe_publishable_key').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_stripe_publishable_key);
+					$('#ach_stripe_webhook_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_stripe_webhook_secret);
+					$('#ach_base_url').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_base_url);
+					$('#ach_client_id').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_client_id);
+					$('#ach_client_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).ach_client_secret);
 					
 					$('#paypal_client_id').val(JSON.parse(data.currencyPaymentMethod.method_data).client_id);
 					$('#paypal_client_secret').val(JSON.parse(data.currencyPaymentMethod.method_data).client_secret);
@@ -2061,12 +2065,12 @@
 					$('#stripe_secret_key').val('');
 					$('#stripe_publishable_key').val('');
 					
-					$('#plaid_stripe_secret_key').val('');
-					$('#plaid_stripe_publishable_key').val('');
-					$('#plaid_stripe_webhook_secret').val('');
-					$('#plaid_base_url').val('');
-					$('#plaid_client_id').val('');
-					$('#plaid_client_secret').val('');
+					$('#ach_stripe_secret_key').val('');
+					$('#ach_stripe_publishable_key').val('');
+					$('#ach_stripe_webhook_secret').val('');
+					$('#ach_base_url').val('');
+					$('#ach_client_id').val('');
+					$('#ach_client_secret').val('');
 
 					$('#paypal_client_id').val('');
 					$('#paypal_client_secret').val('');

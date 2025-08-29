@@ -6,12 +6,10 @@ class MissingRulesException extends \Exception
 {
     use BypassViewHandler;
 
-    public function __construct($instance)
+    public function __construct($component)
     {
-        $class = $instance::class;
-
         parent::__construct(
-            "Missing [\$rules/rules()] property/method on: [{$class}]."
+            "Missing [\$rules/rules()] property/method on Livewire component: [{$component}]."
         );
     }
 }

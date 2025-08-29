@@ -53,7 +53,7 @@ class Transaction extends Model
     ];
 
     public static $cryptoTransactionsExcludes = ['merchant_id', 'bank_id', 'file_id', 'refund_reference', 'transaction_reference_id', 'email', 'phone', 'percentage', 'note'];
-    public static $transactionTypes           = [Deposit, Withdrawal, Transferred, Received, Exchange_From, Exchange_To, Request_From, Request_To, Payment_Sent, Payment_Received, Crypto_Sent,Crypto_Received,Recharge,Cable, Electricity_Bill, Gas_Bill, Water_Bill,Internet_Bill,Insurance,32]; 
+    public static $transactionTypes           = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 27, 22, 23, 24, 25, 26, 32]; 
     
 
 /*Start of relationships*/
@@ -174,7 +174,7 @@ class Transaction extends Model
         });
 
         //check transaction type
-        if (!empty($type) && ($type == Crypto_Sent || $type == Crypto_Received))
+        if (!empty($type) && ($type == 13 || $type == 14))
         {
             $getUserEndUserTransaction->where('transaction_type_id', $type);
         }
@@ -209,7 +209,7 @@ class Transaction extends Model
         })
             ->distinct('user_id');
         //check transaction type
-        if (!empty($type) && ($type == Crypto_Sent || $type == Crypto_Received))
+        if (!empty($type) && ($type == 13 || $type == 14))
         {
             $getTransactionsUsers->where('transaction_type_id', $type);
         }
@@ -227,7 +227,7 @@ class Transaction extends Model
         })
             ->distinct('end_user_id');
         //check transaction type
-        if (!empty($type) && ($type == Crypto_Sent || $type == Crypto_Received))
+        if (!empty($type) && ($type == 13 || $type == 14))
         {
             $getTransactionsEndUsers->where('transaction_type_id', $type);
         }
@@ -267,7 +267,7 @@ class Transaction extends Model
         })
             ->distinct('user_id');
         //check transaction type
-        if (!empty($type) && ($type == Crypto_Sent || $type == Crypto_Received))
+        if (!empty($type) && ($type == 13 || $type == 14))
         {
             $getTransactionsUsers->where('transaction_type_id', $type);
         }
@@ -285,7 +285,7 @@ class Transaction extends Model
         })
             ->distinct('end_user_id');
         //check transaction type
-        if (!empty($type) && ($type == Crypto_Sent || $type == Crypto_Received))
+        if (!empty($type) && ($type == 13 || $type == 14))
         {
             $getTransactionsEndUsers->where('transaction_type_id', $type);
         }
@@ -342,7 +342,7 @@ class Transaction extends Model
         if (!empty($type) && $type != 'all')
         {
             //$conditions['transactions.transaction_type_id'] = $type;
-            if ($type == Deposit || $type == Withdrawal)
+            if ($type == 1 || $type == 2)
             {
                 $whereInCondition = [$type];
             }
@@ -350,31 +350,31 @@ class Transaction extends Model
             {
                 if ($type == 'sent')
                 {
-                    $whereInCondition = [Transferred, Payment_Sent];
+                    $whereInCondition = [3, 11];
                 }
                 elseif ($type == 'request')
                 {
-                    $whereInCondition = [Request_From, Request_To];
+                    $whereInCondition = [9, 10];
                 }
                 elseif ($type == 'received')
                 {
-                    $whereInCondition = [Received, Payment_Received];
+                    $whereInCondition = [4, 12];
                 }
                 elseif ($type == 'exchange')
                 {
-                    $whereInCondition = [Exchange_From, Exchange_To];
+                    $whereInCondition = [5, 6];
                 }
                 elseif ($type == 'crypto_sent')
                 {
-                    $whereInCondition = [Crypto_Sent];
+                    $whereInCondition = [13];
                 }
                 elseif ($type == 'crypto_received')
                 {
-                    $whereInCondition = [Crypto_Received];
+                    $whereInCondition = [14];
                 }
                 elseif ($type == 'recharge')
                 {
-                    $whereInCondition = [Recharge];
+                    $whereInCondition = [15];
                 }
                  elseif ($type == 'Gift_Card')
                 {
@@ -382,7 +382,7 @@ class Transaction extends Model
                 }
                 elseif ($type == 'cable')
                 {
-                    $whereInCondition = [Cable];
+                    $whereInCondition = [27];
                 }
             }
         }
@@ -720,7 +720,7 @@ class Transaction extends Model
             $query->orWhere('charge_fixed', '!=', 0);
         })
         ->where('status', 'Success')
-        ->whereIn('transaction_type_id', [Deposit, Withdrawal, Transferred, Request_To, Payment_Received, Crypto_Sent, Recharge, Cable, Exchange_From, Exchange_To, 32]);
+        ->whereIn('transaction_type_id', [1, 2, 3, 10, 12, 13, 15, 27, 5, 6, 32]);
 
         if (!empty($date_range))
         {
@@ -817,7 +817,7 @@ class Transaction extends Model
         $today                = date('Y-m-d');
         $previousDate         = date("Y-m-d", strtotime("-30 day", strtotime(date('d-m-Y'))));
         $data                 = $this->select(DB::raw('currency_id,SUM(total) as amount,created_at as trans_date,MONTH(created_at) as month,DAY(created_at) as day'))
-            ->whereBetween('created_at', [$previousDate, $today])->where(['transaction_type_id' => Deposit, 'status' => 'Success'])
+            ->whereBetween('created_at', [$previousDate, $today])->where(['transaction_type_id' => 1, 'status' => 'Success'])
             ->groupBy('currency_id', 'day')->get();
         // $homeCurrency = Setting::where(['name' => 'default_currency', 'type' => 'general'])->select('value')->first();
         // $currencyRate = Currency::where(['id' => $homeCurrency->value])->select('rate')->first();
@@ -867,7 +867,7 @@ class Transaction extends Model
         $data_map             = [];
         $today                = date('Y-m-d');
         $previousDate         = date("Y-m-d", strtotime("-30 day", strtotime(date('d-m-Y'))));
-        $data                 = $this->select(DB::raw('currency_id,SUM(total) as amount,created_at as trans_date,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$previousDate, $today])->where(['transaction_type_id' => Withdrawal, 'status' => 'Success'])->groupBy('currency_id', 'day')->get();
+        $data                 = $this->select(DB::raw('currency_id,SUM(total) as amount,created_at as trans_date,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$previousDate, $today])->where(['transaction_type_id' => 2, 'status' => 'Success'])->groupBy('currency_id', 'day')->get();
         $currencies           = getCurrencyIdOfTransaction($data);
         $currencyWithRate     = Currency::whereIn('id', $currencies)->get();
         if (!empty($data))
@@ -907,7 +907,7 @@ class Transaction extends Model
         $final                = [];
         $today                = date('Y-m-d');
         $previousDate         = date("Y-m-d", strtotime("-30 day", strtotime(date('d-m-Y'))));
-        $data                 = $this->select(DB::raw('currency_id,SUM(subtotal) as amount,created_at as trans_date,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$previousDate, $today])->where(['transaction_type_id' => Transferred, 'status' => 'Success'])->groupBy('currency_id', 'day')->get();
+        $data                 = $this->select(DB::raw('currency_id,SUM(subtotal) as amount,created_at as trans_date,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$previousDate, $today])->where(['transaction_type_id' => 3, 'status' => 'Success'])->groupBy('currency_id', 'day')->get();
         $currencies           = getCurrencyIdOfTransaction($data);
         $currencyWithRate     = Currency::whereIn('id', $currencies)->get();
 
@@ -945,7 +945,7 @@ class Transaction extends Model
     public function totalRevenue($from, $to)
     {
         $data = $this->select(DB::raw('currency_id,SUM(charge_percentage + charge_fixed) as total_charge,MONTH(created_at) as month,DAY(created_at) as day'))
-            ->whereBetween('created_at', [$from, $to])->whereIn('transaction_type_id', [Deposit, Withdrawal, Transferred,Recharge])->groupBy('currency_id', 'day')->get();
+            ->whereBetween('created_at', [$from, $to])->whereIn('transaction_type_id', [1, 2, 3, 15])->groupBy('currency_id', 'day')->get();
 
         $currencies       = getCurrencyIdOfTransaction($data);
         $currencyWithRate = Currency::whereIn('id', $currencies)->get();
@@ -961,7 +961,7 @@ class Transaction extends Model
     {
         $data = $this->select(DB::raw('currency_id,SUM(charge_percentage + charge_fixed) as total_charge,
                                               MONTH(created_at) as month,
-                                              DAY(created_at) as day'))->whereBetween('created_at', [$from, $to])->where('transaction_type_id', Deposit)->groupBy('currency_id', 'day')->get();
+                                              DAY(created_at) as day'))->whereBetween('created_at', [$from, $to])->where('transaction_type_id', 1)->groupBy('currency_id', 'day')->get();
 
         $currencies       = getCurrencyIdOfTransaction($data);
         $currencyWithRate = Currency::whereIn('id', $currencies)->get();
@@ -975,7 +975,7 @@ class Transaction extends Model
 
     public function totalWithdrawal($from, $to)
     {
-        $data = $this->select(DB::raw('currency_id,SUM(charge_percentage + charge_fixed) as total_charge,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$from, $to])->where('transaction_type_id', Withdrawal)->groupBy('currency_id', 'day')->get();
+        $data = $this->select(DB::raw('currency_id,SUM(charge_percentage + charge_fixed) as total_charge,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$from, $to])->where('transaction_type_id', 2)->groupBy('currency_id', 'day')->get();
 
         $currencies       = getCurrencyIdOfTransaction($data);
         $currencyWithRate = Currency::whereIn('id', $currencies)->get();
@@ -989,7 +989,7 @@ class Transaction extends Model
 
     public function totalTransfer($from, $to)
     {
-        $data             = $this->select(DB::raw('currency_id,SUM(charge_percentage + charge_fixed) as total_charge,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$from, $to])->where('transaction_type_id', Transferred)->groupBy('currency_id', 'day')->get();
+        $data             = $this->select(DB::raw('currency_id,SUM(charge_percentage + charge_fixed) as total_charge,MONTH(created_at) as month,DAY(created_at) as day'))->whereBetween('created_at', [$from, $to])->where('transaction_type_id', 3)->groupBy('currency_id', 'day')->get();
         $currencies       = getCurrencyIdOfTransaction($data);
         $currencyWithRate = Currency::whereIn('id', $currencies)->get();
         $final            = 0;
@@ -1038,7 +1038,7 @@ class Transaction extends Model
             'currency:id,code',
             'cryptoapi_log:id,object_id,payload',
         ])
-        ->where('transaction_type_id', Crypto_Sent)
+        ->where('transaction_type_id', 13)
         ->where($conditions);
 
         //if user is not empty, check both user_id & end_user_id columns
@@ -1098,7 +1098,7 @@ class Transaction extends Model
             'currency:id,code',
             'cryptoapi_log:id,object_id,payload',
         ])
-            ->where('transaction_type_id', Crypto_Received)
+            ->where('transaction_type_id', 14)
             ->where($conditions);
 
         //if user is not empty, check both user_id & end_user_id columns
@@ -1441,17 +1441,17 @@ class Transaction extends Model
     // new code by rajesh
     public function getTransactionSummary($type, $user_id, $currency_id,$summary )
     {
-        // [Deposit, Withdrawal, Transferred, Received, Exchange_From, Exchange_To, Request_From, Request_To, Payment_Sent, Payment_Received, Crypto_Sent, Crypto_Received,Recharge,Cable]
+        // [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 27]
         $conditions = ['transactions.user_id' => $user_id, 'transactions.currency_id' => $currency_id];
         if ($type == 'allTransactions')
         {
             if($summary=='income')
             {
-                $whereInCondition = [Deposit , Received , Payment_Sent , Crypto_Received];
+                $whereInCondition = [1, 4, 11, 14];
             }
             elseif($summary=='outcome')
             {
-                $whereInCondition = [Withdrawal, Transferred,Payment_Received, Crypto_Sent];
+                $whereInCondition = [2, 3, 12, 13];
             }
             else
             {

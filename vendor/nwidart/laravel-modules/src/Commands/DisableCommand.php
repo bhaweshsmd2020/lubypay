@@ -16,18 +16,11 @@ class DisableCommand extends Command
     protected $name = 'module:disable';
 
     /**
-     * The console command signature.
-     *
-     * @var string
-     */
-    protected $signature = 'module:disable {module?*}';
-
-    /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Disable an array of modules.';
+    protected $description = 'Disable the specified module.';
 
     /**
      * Execute the console command.
@@ -35,11 +28,10 @@ class DisableCommand extends Command
     public function handle(): int
     {
         $this->components->info('Disabling module ...');
-        
-        if (count($this->argument('module'))) {
-            foreach($this->argument('module') as $name) {
-                $this->disable($name);
-            }
+
+        if ($name = $this->argument('module') ) {
+            $this->disable($name);
+
             return 0;
         }
 

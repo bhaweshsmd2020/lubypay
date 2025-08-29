@@ -2,22 +2,28 @@
 
 namespace $NAMESPACE$;
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Factory;
 
 class $CLASS$ extends ServiceProvider
 {
-    protected string $moduleName = '$MODULE$';
+    /**
+     * @var string $moduleName
+     */
+    protected $moduleName = '$MODULE$';
 
-    protected string $moduleNameLower = '$LOWER_NAME$';
+    /**
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = '$LOWER_NAME$';
 
     /**
      * Boot the application events.
+     *
+     * @return void
      */
-    public function boot(): void
+    public function boot()
     {
-        $this->registerCommands();
-        $this->registerCommandSchedules();
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
@@ -26,37 +32,55 @@ class $CLASS$ extends ServiceProvider
 
     /**
      * Register the service provider.
+     *
+     * @return void
      */
-    public function register(): void
+    public function register()
     {
         $this->app->register(RouteServiceProvider::class);
     }
 
     /**
-     * Register commands in the format of Command::class
+     * Register config.
+     *
+     * @return void
      */
-    protected function registerCommands(): void
+    protected function registerConfig()
     {
-        // $this->commands([]);
+        $this->publishes([
+            module_path($this->moduleName, '$PATH_CONFIG$/config.php') => config_path($this->moduleNameLower . '.php'),
+        ], 'config');
+        $this->mergeConfigFrom(
+            module_path($this->moduleName, '$PATH_CONFIG$/config.php'), $this->moduleNameLower
+        );
     }
 
     /**
-     * Register command Schedules.
+     * Register views.
+     *
+     * @return void
      */
-    protected function registerCommandSchedules(): void
+    public function registerViews()
     {
-        // $this->app->booted(function () {
-        //     $schedule = $this->app->make(Schedule::class);
-        //     $schedule->command('inspire')->hourly();
-        // });
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
+
+        $sourcePath = module_path($this->moduleName, '$PATH_VIEWS$');
+
+        $this->publishes([
+            $sourcePath => $viewPath
+        ], ['views', $this->moduleNameLower . '-module-views']);
+
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
     /**
      * Register translations.
+     *
+     * @return void
      */
-    public function registerTranslations(): void
+    public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/'.$this->moduleNameLower);
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
@@ -68,34 +92,11 @@ class $CLASS$ extends ServiceProvider
     }
 
     /**
-     * Register config.
-     */
-    protected function registerConfig(): void
-    {
-        $this->publishes([module_path($this->moduleName, '$PATH_CONFIG$/config.php') => config_path($this->moduleNameLower.'.php')], 'config');
-        $this->mergeConfigFrom(module_path($this->moduleName, '$PATH_CONFIG$/config.php'), $this->moduleNameLower);
-    }
-
-    /**
-     * Register views.
-     */
-    public function registerViews(): void
-    {
-        $viewPath = resource_path('views/modules/'.$this->moduleNameLower);
-        $sourcePath = module_path($this->moduleName, '$PATH_VIEWS$');
-
-        $this->publishes([$sourcePath => $viewPath], ['views', $this->moduleNameLower.'-module-views']);
-
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
-
-        $componentNamespace = str_replace('/', '\\', config('modules.namespace').'\\'.$this->moduleName.'\\'.config('modules.paths.generator.component-class.path'));
-        Blade::componentNamespace($componentNamespace, $this->moduleNameLower);
-    }
-
-    /**
      * Get the services provided by the provider.
+     *
+     * @return array
      */
-    public function provides(): array
+    public function provides()
     {
         return [];
     }
@@ -103,12 +104,11 @@ class $CLASS$ extends ServiceProvider
     private function getPublishableViewPaths(): array
     {
         $paths = [];
-        foreach (config('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->moduleNameLower)) {
-                $paths[] = $path.'/modules/'.$this->moduleNameLower;
+        foreach (\Config::get('view.paths') as $path) {
+            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
             }
         }
-
         return $paths;
     }
 }

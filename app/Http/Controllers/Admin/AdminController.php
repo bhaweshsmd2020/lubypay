@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-require_once(base_path('authenticator/vendor/autoload.php'));
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Users\EmailController;
 use App\Http\Helpers\Common;
@@ -11,6 +10,8 @@ use App\Models\Admin;
 use App\Models\EmailTemplate;
 use App\Models\Preference;
 use App\Models\Setting;
+use App\Models\Role;
+use App\Models\RoleUser;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ use Session;
 use Sonata\GoogleAuthenticator\GoogleAuthenticator;
 use Sonata\GoogleAuthenticator\GoogleQrUrl;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -32,408 +34,131 @@ class AdminController extends Controller
         $this->emailController = new EmailController();
     }
 
-    public function login()
+    public function index()
     {
-        return redirect()->route('admin');
+        $data['menu'] = 'admin_list';
+
+        $data['admins'] = Admin::with('role')
+            ->whereHas('role', function($q) {
+                $q->where('user_type', 'Admin');
+            })
+            ->where('role_id', '!=', 12)
+            ->get();
+
+        Admin::whereHas('role', function($q) {
+                $q->where('user_type', 'Admin');
+            })
+            ->where('role_id', '!=', 12)
+            ->where('read_status', 0)
+            ->update(['read_status' => 1]);
+
+        return view('admin.admin.view', $data);
     }
 
-    public function authenticate(Request $request)
+    public function add()
     {
-        $this->validate($request, [
-            'email'    => 'required|email',
-            'password' => 'required',
-        ]);
+        $data['menu'] = 'admin_list';
+        $data['roles'] = $roles = Role::where('user_type', 'Admin')->where('id', '!=', '12')->get();
+        return view('admin.admin.add', $data);
+    }
 
-        $admin = Admin::where('email', $request['email'])->first();
+    public function store(Request $request)
+    {
+        $rules = array(
+            'first_name'            => 'required',
+            'last_name'             => 'required',
+            'email'                 => 'required|unique:admins,email',
+            'password'              => 'required|confirmed',
+            'password_confirmation' => 'required',
+        );
 
-        if (@$admin->status != 'Inactive')
+        $fieldNames = array(
+            'first_name'            => 'First Name',
+            'last_name'             => 'Last Name',
+            'email'                 => 'Email',
+            'password'              => 'Password',
+            'password_confirmation' => 'Confirm Password',
+        );
+        $validator = Validator::make($request->all(), $rules);
+        $validator->setAttributeNames($fieldNames);
+
+        if ($validator->fails())
         {
-            if (Auth::guard('admin')->attempt(['email' => trim($request['email']), 'password' => trim($request['password'])]))
-            {
-                // $preferences = Preference::get();
-                $preferences = Preference::where('field', '!=', 'dflt_lang')->get();
-                if (!empty($preferences))
-                {
-                    foreach ($preferences as $pref)
-                    {
-                        $pref_arr[$pref->field] = $pref->value;
-                    }
-                }
-                if (!empty($preferences))
-                {
-                    Session::put($pref_arr);
-                }
-
-                $default_currency = Setting::where('name', 'default_currency')->first();
-                if (!empty($default_currency))
-                {
-                    Session::put('default_currency', $default_currency->value);
-                }
-
-                // default_language
-                $default_language = Setting::where('name', 'default_language')->first();
-                if (!empty($default_language))
-                {
-                    Session::put('default_language', $default_language->value);
-                }
-
-                // company_name
-                $company_name = Setting::where('name', 'name')->first();
-                if (!empty($company_name))
-                {
-                    Session::put('name', $company_name->value);
-                }
-
-                // company_logo
-                $company_logo = Setting::where('name', 'logo')->first();
-                if (!empty($company_logo))
-                {
-                    Session::put('company_logo', $company_logo->value);
-                }
-                
-                $ip = $request->ip();    
-                $location_details = simplexml_load_file("http://www.geoplugin.net/xml.gp?ip=".$ip);
-
-                $log                  = [];
-                $log['user_id']       = Auth::guard('admin')->check() ? Auth::guard('admin')->user()->id : null;
-                $log['type']          = 'Admin';
-                $log['ip_address']    = $request->ip();
-                $log['browser_agent'] = $request->header('user-agent');
-                $log['city'] = $location_details->geoplugin_city;
-                $log['country'] = $location_details->geoplugin_countryName;
-                ActivityLog::create($log);
-                
-                if(Auth::guard('admin')->user()->fa_status == '1'){
-                    return redirect()->route('faverify');
-                }else{
-                    return redirect()->route('dashboard');
-                }
-            }
-            else
-            {
-                $this->helper->one_time_message('danger', 'Please Check Your Email/Password');
-                return redirect()->route('admin');
-            }
+            return back()->withErrors($validator)->withInput();
         }
         else
         {
-            $this->helper->one_time_message('danger', 'You are Blocked.');
-            return redirect()->route('admin');
+            $admin             = new Admin();
+            $admin->first_name = $request->first_name;
+            $admin->last_name  = $request->last_name;
+            $admin->email      = $request->email;
+            $admin->password   = Hash::make($request->password);
+            $admin->role_id    = $request->role;
+            $admin->save();
+            RoleUser::insert(['user_id' => $admin->id, 'role_id' => $request->role, 'user_type' => 'Admin']);
         }
-    }
-    
-    public function faverify()
-    {
-        $data['menu']          = '2fa';
-        return view('admin.profile.2fa', $data);
-    }
-    
-    public function submitfa(Request $request)
-    {
-        $user = Auth::guard('admin')->user();
-        $g = new GoogleAuthenticator();
-        if($g->checkcode($user->googlefa_secret, $request->code, 3)){
-            $user->update(['fa_expiring' => Carbon::now()->addHours(2)]);
-            return redirect()->route('dashboard');
-        }else{
-            $this->helper->one_time_message('error', 'Invalid code');
-            return back();
+
+        if (!isset($request->from_installer))
+        {
+            $this->helper->one_time_message('success', 'Admin Created Successfully!');
+            return redirect()->intended("admin/admins");
         }
     }
 
-    public function logout()
+    public function edit($id)
     {
-        // Artisan::call('config:clear');
-        // Artisan::call('cache:clear');
-        // Artisan::call('view:clear');
-        // \Session::flush();
-        Auth::guard('admin')->logout();
-        return redirect()->route('admin');
+        $data['menu']     = 'admin_list';
+        $data['admin'] = $users = Admin::find($id);
+        $data['roles'] = $roles = Role::where('user_type', "Admin")->where('id', '!=', '12')->get();
+        return view('admin.admin.edit', $data);
     }
 
-    /**
-     * Show and manage Admin profile
-     *
-     * @return Admin profile page view
-     */
-    public function profile()
-    {
-        $data['menu']          = 'profile';
-        $data['admin_id']      = $admin_id      = Auth::guard('admin')->user()->id;
-        $data['admin_picture'] = $admin_picture = Auth::guard('admin')->user()->picture;
-
-        return view('admin.profile.editProfile', $data);
-    }
-
-    /**
-     * Update the specified Admin in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int                      $id
-     * @return Admin                    List page view
-     */
     public function update(Request $request, $id)
     {
-        // dd($request->all());
-
-        $this->validate($request, [
+        $rules = array(
             'first_name' => 'required',
             'last_name'  => 'required',
-            'picture'    => 'mimes:png,jpg,jpeg,gif,bmp|max:10000',
-        ]);
+            'email'      => 'required|email|unique:admins,email,' . $id,
+        );
 
-        $data['first_name'] = $request->first_name;
-        $data['last_name']  = $request->last_name;
-        $data['updated_at'] = date('Y-m-d H:i:s');
+        $fieldNames = array(
+            'first_name' => 'First Name',
+            'last_name'  => 'Last Name',
+            'email'      => 'Email',
+        );
 
-        try
+        $validator = Validator::make($request->all(), $rules);
+        $validator->setAttributeNames($fieldNames);
+        if ($validator->fails())
         {
-            $pic = $request->file('picture');
-            if (isset($pic))
-            {
-                $upload = 'public/uploads/userPic';
-
-                $pic1 = $request->pic;
-
-                if ($pic1 != null)
-                {
-                    $dir = public_path("uploads/userPic/$pic1");
-                    if (file_exists($dir))
-                    {
-                        unlink($dir);
-                    }
-                }
-                $filename  = time() . '.' . $pic->getClientOriginalExtension();
-
-                //extension checking
-                $extension = strtolower($pic->getClientOriginalExtension());
-                if ($extension == 'png' || $extension == 'jpg' || $extension == 'jpeg' || $extension == 'gif' || $extension == 'bmp')
-                {
-                    // $pic = $pic->move($upload, $filename);
-                    $pic = Image::make($pic->getRealPath());
-                    $pic->resize(100, 100)->save($upload . '/' . $filename);
-                    $data['picture'] = $filename;
-                }
-                else
-                {
-                    $this->helper->one_time_message('error', 'Invalid Image Format!');
-                }
-            }
-            Admin::where(['id' => $id])->update($data);
-            $this->helper->one_time_message('success', 'Profile Updated Successfully');
-            return redirect('admin/profile');
-        }
-        catch (\Exception $e)
-        {
-            $this->helper->one_time_message('error', $e->getMessage());
-            return redirect('admin/profile');
-        }
-    }
-
-    /**
-     * show admin change password operation
-     *
-     * @return change password page view
-     */
-    public function changePassword()
-    {
-        $data['menu']     = 'profile';
-        $data['admin_id'] = $admin_id = Auth::guard('admin')->user()->id;
-        
-        $g = new GoogleAuthenticator();
-        $secret = $g->generateSecret();
-        $data['secret'] = $secret;
-        $admin_email = Auth::guard('admin')->user()->email;
-        $site_name = env('APP_NAME');
-        $data['image'] = GoogleQrUrl::generate($admin_email, $secret, $site_name);
-        
-        return view('admin.profile.change_password', $data);
-    }
-    
-    public function submit2fa(Request $request)
-    {
-        $admin_id = Auth::guard('admin')->user()->id;
-        $user = Admin::findOrFail($admin_id);
-        $g = new GoogleAuthenticator();
-        $secret = $request->vv;
-        if ($request->type == 0) {
-            $check = $g->checkcode($user->googlefa_secret, $request->code, 3);
-            if ($check) {
-                $user->fa_status = 0;
-                $user->googlefa_secret = null;
-                $user->save();
-                
-                $this->helper->one_time_message('success', '2fa disabled Successfully');
-                return redirect('admin/change-password');
-            } else {
-                $this->helper->one_time_message('error', 'Invalid code');
-                return redirect('admin/change-password');
-            }
-        } else {
-            $check = $g->checkcode($secret, $request->code, 3);
-            if ($check) {
-                $user->fa_status = 1;
-                $user->googlefa_secret = $request->vv;
-                $user->save();
-                $this->helper->one_time_message('success', '2fa enabled Successfully');
-                return redirect('admin/change-password');
-            } else {
-                $this->helper->one_time_message('error', 'Invalid code');
-                return redirect('admin/change-password');
-            }
-        }
-    }
-
-    public function passwordCheck(Request $request)
-    {
-        $admin = Admin::where(['id' => $request->id])->first();
-
-        if (!\Hash::check($request->old_pass, $admin->password))
-        {
-            $data['status'] = true;
-            $data['fail']   = "Your old password is incorrect!";
+            return back()->withErrors($validator)->withInput();
         }
         else
         {
-            $data['status'] = false;
+            $admin             = Admin::find($id);
+            $admin->first_name = $request->first_name;
+            $admin->last_name  = $request->last_name;
+            $admin->email      = $request->email;
+            $admin->role_id    = $request->role;
+            $admin->save();
+            RoleUser::where(['user_id' => $admin->id, 'user_type' => 'Admin'])->update(['role_id' => $request->role]);
+            $this->helper->one_time_message('success', 'Admin Updated Successfully!');
+            return redirect()->intended("admin/admins");
         }
-        return json_encode($data);
     }
 
-    /**
-     * Change admin password operation perform
-     *
-     * @return change password page view
-     */
-
-    public function updatePassword(Request $request)
+    public function delete($id)
     {
-        $this->validate($request, [
-            'old_pass' => 'required',
-            'new_pass' => 'required',
-        ]);
-
-        $admin = Admin::where(['id' => $request->id])->first(['password']);
-
-        $data['password']   = \Hash::make($request->new_pass);
-        $data['updated_at'] = date('Y-m-d H:i:s');
-
-        if (\Hash::check($request->old_pass, $admin->password))
+        $admin = Admin::find($id);
+        if ($admin)
         {
-            Admin::where(['id' => $request->id])->update($data);
+            $admin->delete();
 
-            $this->helper->one_time_message('success', 'Password Updated successfully!');
-            return redirect()->intended("admin/profile");
-        }
-        else
-        {
-            $this->helper->one_time_message('error', 'Old Password is Wrong!');
-            return redirect()->intended("admin/change-password");
+            ActivityLog::where(['user_id' => $id])->delete();
+            RoleUser::where(['user_id' => $id, 'user_type' => 'Admin'])->delete();
+
+            $this->helper->one_time_message('success', 'Admin Deleted Successfully');
+            return redirect()->intended("admin/admins");
         }
     }
-
-    public function forgetPassword(Request $request)
-    {
-        $methodName = $request->getMethod();
-        // dd($methodName);
-        if ($methodName == "GET")
-        {
-            return view('admin.auth.forgetPassword');
-        }
-        else
-        {
-            $email = $request->email;
-            $admin = Admin::where('email', $email)->first(['id', 'first_name', 'last_name']);
-            // dd($admin);
-            if (!$admin)
-            {
-                $this->helper->one_time_message('error', 'Email Address doesn\'t match!');
-                return back();
-            }
-            $data['email']      = $request->email;
-            $data['token']      = $token      = base64_encode(encryptIt(rand(1000000, 9999999) . '_' . $request->email));
-            $data['created_at'] = date('Y-m-d H:i:s');
-
-            DB::table('password_resets')->insert($data);
-
-            $adminFullName = $admin->first_name . ' ' . $admin->last_name;
-            $this->sendPasswordResetEmail($request->email, $token, $adminFullName);
-
-            $this->helper->one_time_message('success', 'Password reset link has been sent to your email address.');
-            return back();
-        }
-    }
-
-    public function sendPasswordResetEmail($toEmail, $token, $adminFullName)
-    {
-        //Mail for Password Reset - start
-        $userPasswordResetTempInfo = EmailTemplate::where([
-            'temp_id'     => 18,
-            'language_id' => getDefaultLanguage(),
-        ])->select('subject', 'body')->first();
-
-        $englishUserPasswordResetTempInfo = EmailTemplate::where(['temp_id' => 18, 'lang' => 'en'])->select('subject', 'body')->first();
-
-        if (!empty($userPasswordResetTempInfo->subject) && !empty($userPasswordResetTempInfo->body))
-        {
-            // subject
-            $userPasswordResetTempInfo_sub = $userPasswordResetTempInfo->subject;
-            // body
-            $userPasswordResetTempInfo_msg = str_replace('{user}', $adminFullName, $userPasswordResetTempInfo->body);
-        }
-        else
-        {
-            // subject
-            $userPasswordResetTempInfo_sub = $englishUserPasswordResetTempInfo->subject;
-            // body
-            $userPasswordResetTempInfo_msg = str_replace('{user}', $adminFullName, $englishUserPasswordResetTempInfo->body);
-        }
-        $userPasswordResetTempInfo_msg = str_replace('{email}', $toEmail, $userPasswordResetTempInfo_msg);
-        $userPasswordResetTempInfo_msg = str_replace('{password_reset_url}', url('admin/password/resets', $token), $userPasswordResetTempInfo_msg);
-        $userPasswordResetTempInfo_msg = str_replace('{soft_name}', getCompanyName(), $userPasswordResetTempInfo_msg);
-
-        if (checkAppMailEnvironment())
-        {
-            $this->emailController->sendEmail($toEmail, $userPasswordResetTempInfo_sub, $userPasswordResetTempInfo_msg);
-        }
-        //Mail for Password Reset - end
-    }
-
-    public function verifyToken($token)
-    {
-        if (!$token)
-        {
-            $this->helper->one_time_message('error', 'Token not found!');
-            return back();
-        }
-        $reset = DB::table('password_resets')->where('token', $token)->first();
-        if ($reset)
-        {
-            $data['token'] = $token;
-            return view('admin.auth.passwordForm', $data);
-        }
-        else
-        {
-            $this->helper->one_time_message('error', 'Token session has been destroyed. Please try to reset again.');
-            return back();
-        }
-
-    }
-
-    public function confirmNewPassword(Request $request)
-    {
-        $token    = $request->token;
-        $password = $request->new_password;
-        $confirm  = DB::table('password_resets')->where('token', $token)->first(['email']);
-
-        $admin           = Admin::where('email', $confirm->email)->first();
-        $admin->password = Hash::make($password);
-        $admin->save();
-
-        DB::table('password_resets')->where('token', $token)->delete();
-
-        $this->helper->one_time_message('success', 'Password changed successfully.');
-        return redirect()->to('/admin');
-    }
-
 }

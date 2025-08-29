@@ -14,7 +14,7 @@ use RecursiveIteratorIterator;
 final class FileSystemHelper implements FileSystemHelperInterface
 {
     /** @var string Real path of the base folder where all the I/O can occur */
-    private readonly string $baseFolderRealPath;
+    private string $baseFolderRealPath;
 
     /**
      * @param string $baseFolderPath The path of the base folder where all the I/O can occur

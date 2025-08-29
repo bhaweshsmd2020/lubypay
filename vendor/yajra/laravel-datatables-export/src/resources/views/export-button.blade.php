@@ -2,17 +2,8 @@
     <form class="mr-2"
           x-on:submit.prevent="
                 $refs.exportBtn.disabled = true;
-                var oTable = LaravelDataTables['{{ $tableId }}'];
-                var baseUrl = oTable.ajax.url() === '' ? window.location.toString() : oTable.ajax.url();
-
-                var params = new URLSearchParams({
-                    action: 'exportQueue',
-                    exportType: '{{$fileType}}',
-                    sheetName: '{{$sheetName}}',
-                    emailTo: '{{urlencode($emailTo)}}',
-                });
-
-                $.get(baseUrl + '?' + params.toString() + '&' + $.param(oTable.ajax.params())).then(function(exportId) {
+                var url = window._buildUrl(LaravelDataTables['{{ $tableId }}'], 'exportQueue');
+                $.get(url + '&exportType={{$fileType}}&sheetName={{$sheetName}}&emailTo={{urlencode($emailTo)}}').then(function(exportId) {
                     $wire.export(exportId)
                 }).catch(function(error) {
                     $wire.exportFinished = true;

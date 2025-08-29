@@ -8,7 +8,7 @@ class TransactionType extends Model
 {
     protected $table    = 'transaction_types';
     protected $fillable = [
-        'name',
+        'name', 'description', 'slug', 'type', 'status', 'orderby',
     ];
 
     public function fees_limit()

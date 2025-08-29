@@ -46,7 +46,6 @@ class AuthorizationController
      *
      * @param  \League\OAuth2\Server\AuthorizationServer  $server
      * @param  \Illuminate\Contracts\Auth\StatefulGuard  $guard
-     * @param  \Laravel\Passport\Contracts\AuthorizationViewResponse  $response
      * @return void
      */
     public function __construct(AuthorizationServer $server,
@@ -65,7 +64,7 @@ class AuthorizationController
      * @param  \Illuminate\Http\Request  $request
      * @param  \Laravel\Passport\ClientRepository  $clients
      * @param  \Laravel\Passport\TokenRepository  $tokens
-     * @return \Illuminate\Http\Response|\Laravel\Passport\Contracts\AuthorizationViewResponse
+     * @return \Laravel\Passport\Contracts\AuthorizationViewResponse
      */
     public function authorize(ServerRequestInterface $psrRequest,
                               Request $request,

@@ -10,6 +10,8 @@ class $CLASS$
 
     /**
      * Create a new event instance.
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -18,8 +20,10 @@ class $CLASS$
 
     /**
      * Get the channels the event should be broadcast on.
+     *
+     * @return array
      */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
         return [];
     }

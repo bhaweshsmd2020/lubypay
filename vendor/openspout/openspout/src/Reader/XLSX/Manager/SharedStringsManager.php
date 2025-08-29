@@ -8,7 +8,7 @@ use DOMElement;
 use OpenSpout\Common\Exception\IOException;
 use OpenSpout\Reader\Exception\XMLProcessingException;
 use OpenSpout\Reader\Wrapper\XMLReader;
-use OpenSpout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyFactoryInterface;
+use OpenSpout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyFactory;
 use OpenSpout\Reader\XLSX\Manager\SharedStringsCaching\CachingStrategyInterface;
 use OpenSpout\Reader\XLSX\Options;
 
@@ -34,15 +34,15 @@ final class SharedStringsManager
     public const XML_ATTRIBUTE_VALUE_PRESERVE = 'preserve';
 
     /** @var string Path of the XLSX file being read */
-    private readonly string $filePath;
+    private string $filePath;
 
-    private readonly Options $options;
+    private Options $options;
 
     /** @var WorkbookRelationshipsManager Helps retrieving workbook relationships */
-    private readonly WorkbookRelationshipsManager $workbookRelationshipsManager;
+    private WorkbookRelationshipsManager $workbookRelationshipsManager;
 
-    /** @var CachingStrategyFactoryInterface Factory to create shared strings caching strategies */
-    private readonly CachingStrategyFactoryInterface $cachingStrategyFactory;
+    /** @var CachingStrategyFactory Factory to create shared strings caching strategies */
+    private CachingStrategyFactory $cachingStrategyFactory;
 
     /** @var CachingStrategyInterface The best caching strategy for storing shared strings */
     private CachingStrategyInterface $cachingStrategy;
@@ -51,7 +51,7 @@ final class SharedStringsManager
         string $filePath,
         Options $options,
         WorkbookRelationshipsManager $workbookRelationshipsManager,
-        CachingStrategyFactoryInterface $cachingStrategyFactory
+        CachingStrategyFactory $cachingStrategyFactory
     ) {
         $this->filePath = $filePath;
         $this->options = $options;
@@ -199,7 +199,8 @@ final class SharedStringsManager
 
                 $sharedStringValue .= $shouldPreserveWhitespace
                     ? $textNodeValue
-                    : trim($textNodeValue);
+                    : trim($textNodeValue)
+                ;
             }
         }
 

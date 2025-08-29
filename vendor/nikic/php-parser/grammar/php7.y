@@ -221,10 +221,7 @@ non_empty_class_const_list:
 ;
 
 class_const:
-      T_STRING '=' expr
-          { $$ = Node\Const_[new Node\Identifier($1, stackAttributes(#1)), $3]; }
-    | semi_reserved '=' expr
-          { $$ = Node\Const_[new Node\Identifier($1, stackAttributes(#1)), $3]; }
+    identifier_maybe_reserved '=' expr                      { $$ = Node\Const_[$1, $3]; }
 ;
 
 inner_statement_list_ex:
@@ -521,8 +518,7 @@ new_elseif_list:
 ;
 
 new_elseif:
-     T_ELSEIF '(' expr ')' ':' inner_statement_list
-         { $$ = Stmt\ElseIf_[$3, $6]; $this->fixupAlternativeElse($$); }
+     T_ELSEIF '(' expr ')' ':' inner_statement_list         { $$ = Stmt\ElseIf_[$3, $6]; }
 ;
 
 else_single:
@@ -532,8 +528,7 @@ else_single:
 
 new_else_single:
       /* empty */                                           { $$ = null; }
-    | T_ELSE ':' inner_statement_list
-          { $$ = Stmt\Else_[$3]; $this->fixupAlternativeElse($$); }
+    | T_ELSE ':' inner_statement_list                       { $$ = Stmt\Else_[$3]; }
 ;
 
 foreach_variable:
@@ -724,9 +719,6 @@ class_statement:
             $this->checkProperty($$, #2); }
     | optional_attributes method_modifiers T_CONST class_const_list semi
           { $$ = new Stmt\ClassConst($4, $2, attributes(), $1);
-            $this->checkClassConst($$, #2); }
-    | optional_attributes method_modifiers T_CONST type_expr class_const_list semi
-          { $$ = new Stmt\ClassConst($5, $2, attributes(), $1, $4);
             $this->checkClassConst($$, #2); }
     | optional_attributes method_modifiers T_FUNCTION optional_ref identifier_maybe_reserved '(' parameter_list ')'
       optional_return_type method_body
@@ -949,8 +941,8 @@ expr:
 ;
 
 anonymous_class:
-      optional_attributes class_entry_type ctor_arguments extends_from implements_list '{' class_statement_list '}'
-          { $$ = array(Stmt\Class_[null, ['type' => $2, 'extends' => $4, 'implements' => $5, 'stmts' => $7, 'attrGroups' => $1]], $3);
+      optional_attributes T_CLASS ctor_arguments extends_from implements_list '{' class_statement_list '}'
+          { $$ = array(Stmt\Class_[null, ['type' => 0, 'extends' => $4, 'implements' => $5, 'stmts' => $7, 'attrGroups' => $1]], $3);
             $this->checkClass($$[0], -1); }
 ;
 
@@ -1046,8 +1038,6 @@ constant:
 class_constant:
       class_name_or_var T_PAAMAYIM_NEKUDOTAYIM identifier_maybe_reserved
           { $$ = Expr\ClassConstFetch[$1, $3]; }
-    | class_name_or_var T_PAAMAYIM_NEKUDOTAYIM '{' expr '}'
-          { $$ = Expr\ClassConstFetch[$1, $4]; }
     /* We interpret an isolated FOO:: as an unfinished class constant fetch. It could also be
        an unfinished static property fetch or unfinished scoped call. */
     | class_name_or_var T_PAAMAYIM_NEKUDOTAYIM error
@@ -1202,7 +1192,7 @@ array_pair:
     | expr T_DOUBLE_ARROW expr                              { $$ = Expr\ArrayItem[$3, $1,   false]; }
     | expr T_DOUBLE_ARROW ampersand variable                { $$ = Expr\ArrayItem[$4, $1,   true]; }
     | expr T_DOUBLE_ARROW list_expr                         { $$ = Expr\ArrayItem[$3, $1,   false]; }
-    | T_ELLIPSIS expr                                       { $$ = new Expr\ArrayItem($2, null, false, attributes(), true); }
+    | T_ELLIPSIS expr                                       { $$ = Expr\ArrayItem[$2, null, false, attributes(), true]; }
     | /* empty */                                           { $$ = null; }
 ;
 

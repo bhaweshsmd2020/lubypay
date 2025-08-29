@@ -20,6 +20,10 @@ export default function Register() {
         };
     }, []);
 
+    const handleOnChange = (event) => {
+        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
+    };
+
     const submit = (e) => {
         e.preventDefault();
 
@@ -41,7 +45,7 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="name"
                         isFocused={true}
-                        onChange={(e) => setData('name', e.target.value)}
+                        onChange={handleOnChange}
                         required
                     />
 
@@ -58,7 +62,7 @@ export default function Register() {
                         value={data.email}
                         className="mt-1 block w-full"
                         autoComplete="username"
-                        onChange={(e) => setData('email', e.target.value)}
+                        onChange={handleOnChange}
                         required
                     />
 
@@ -75,7 +79,7 @@ export default function Register() {
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        onChange={(e) => setData('password', e.target.value)}
+                        onChange={handleOnChange}
                         required
                     />
 
@@ -92,7 +96,7 @@ export default function Register() {
                         value={data.password_confirmation}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        onChange={(e) => setData('password_confirmation', e.target.value)}
+                        onChange={handleOnChange}
                         required
                     />
 
@@ -107,7 +111,7 @@ export default function Register() {
                         Already registered?
                     </Link>
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <PrimaryButton className="ml-4" disabled={processing}>
                         Register
                     </PrimaryButton>
                 </div>

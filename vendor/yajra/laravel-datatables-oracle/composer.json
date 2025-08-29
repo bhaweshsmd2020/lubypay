@@ -22,9 +22,6 @@
     "illuminate/view": "^9|^10"
   },
   "require-dev": {
-    "algolia/algoliasearch-client-php": "^3.4",
-    "laravel/scout": "^10.5",
-    "meilisearch/meilisearch-php": "^1.4",
     "nunomaduro/larastan": "^2.4",
     "orchestra/testbench": "^8",
     "yajra/laravel-datatables-html": "^9.3.4|^10"
@@ -63,10 +60,7 @@
     }
   },
   "config": {
-    "sort-packages": true,
-    "allow-plugins": {
-      "php-http/discovery": true
-    }
+    "sort-packages": true
   },
   "scripts": {
     "test": "vendor/bin/phpunit"

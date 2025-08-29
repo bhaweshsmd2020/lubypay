@@ -122,25 +122,6 @@ class Field extends Fluent
     }
 
     /**
-     * Get options from a Enum::cases().
-     *
-     * @param array $cases
-     * @return $this
-     */
-    public function enumOptions(array $cases): static
-    {
-        $options = [];
-        foreach ($cases as $case) {
-            $options[] = [
-                'value' => $case->value,
-                'label' => $case->value,
-            ];
-        }
-
-        return $this->options($options);
-    }
-
-    /**
      * Set select options.
      *
      * @param  array|Arrayable  $options

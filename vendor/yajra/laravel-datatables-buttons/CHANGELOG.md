@@ -1,13 +1,5 @@
 # Laravel DataTables Buttons Plugin CHANGELOG.
 
-## v10.0.8 - 2023-11-15
-
-- fix: unnecessary exception thrown #183
-
-## v10.0.7 - 2023-07-31
-
-- fix: use callback function if exportRender method is set #177
-
 ## v10.0.6 - 2023-02-28
 
 - fix: export package integration error message #174

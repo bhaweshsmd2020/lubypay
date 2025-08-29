@@ -23,7 +23,7 @@ final class Writer extends AbstractWriterMultiSheets
     /** @var string Content-Type value for the header */
     protected static string $headerContentType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
-    private readonly Options $options;
+    private Options $options;
 
     public function __construct(?Options $options = null)
     {
@@ -42,8 +42,7 @@ final class Writer extends AbstractWriterMultiSheets
         $fileSystemHelper = new FileSystemHelper(
             $this->options->getTempFolder(),
             new ZipHelper(),
-            new XLSX(),
-            $this->creator
+            new XLSX()
         );
         $fileSystemHelper->createBaseFilesAndFolders();
 
