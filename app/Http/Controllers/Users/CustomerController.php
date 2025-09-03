@@ -295,20 +295,20 @@ class CustomerController extends Controller
 
     public function comissions()
     {
-
-
-        // dd(session()->all());
-
         $data['menu']  = 'dashboard';
         $data['title'] = 'Dashboard';
 
-        $transaction          = new Transaction();
-        $data['transactions'] = $transaction->dashboardTransactionList();
-        // dd($data['transactions']);
-
-        $data['wallets'] = $wallets = Wallet::with('currency:id,type,logo,code,status')->where(['user_id' => Auth::user()->id])->orderBy('balance', 'ASC')->get(['id', 'currency_id', 'balance', 'is_default']);
+        // $transaction          = new Transaction();
+        // $data['transactions'] = $transaction->dashboardTransactionList();
+        // $data['wallets'] = $wallets = Wallet::with('currency:id,type,logo,code,status')->where(['user_id' => Auth::user()->id])->orderBy('balance', 'ASC')->get(['id', 'currency_id', 'balance', 'is_default']);
 
         return view('user_dashboard.layouts.comissions', $data);
+    }
+    public function wallet()
+    {
+        $data['menu']  = 'dashboard';
+        $data['title'] = 'Dashboard';
+        return view('user_dashboard.layouts.wallet', $data);
     }
 
     public function profile()

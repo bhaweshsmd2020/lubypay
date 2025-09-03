@@ -14,7 +14,7 @@
         /* text-align: center; */
         background: #fff;
         position: relative;
-        height: 250px;
+        height: 285px;
     }
     .commission-card h5 {
         font-weight: bold;
@@ -35,13 +35,26 @@
         align-items: center;
         justify-content: center;
         margin: 10px auto;
-        font-size: 14px;
-        font-weight: bold;
+        font-size: 5px;
+        /* font-weight: bold; */
         color: var(--clr);
     }
     .table tr th {
      background: none !important;
     }
+
+    .text-success {
+    color:  !important;
+}
+table thead {
+     border-bottom: 0px solid #dee2e6;
+}
+.table td, 
+.table th {
+    border-left: none !important;
+    border-right: none !important;
+}
+
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -52,18 +65,16 @@
         <!-- Top Commission Cards -->
         <div class="row mb-4">
             <div class="col-md-3">
-                <div class="commission-card">
+                <div class="commission-card mb-3">
                     <i class="fa fa-trophy" style="font-size: 30px;color:#573aef; background: #f2f0fe; padding: 14px; border-radius: 40px;"></i>
                     <h5>Champion</h5>
                     <p>ab 904</p>
-                    <span class="d-inline" style="position: absolute; bottom: 18px;">
-                        <div class="commission-value">€100.000</div>
+                        <div class="commission-value" style="position: absolute; bottom: 18px;">€100.000</div>
                         
-                    </span>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="commission-card">
+                <div class="commission-card mb-3">
                     <i class="bi bi-award" style="font-size: 30px;color:#e7b731; background: #fef8ef; padding: 11px 13px; border-radius: 40px;"></i>
                     <h5>Master</h5>
                     <p>ab 904</p>
@@ -74,18 +85,17 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="commission-card">
+                <div class="commission-card mb-3">
                     <i class="bi bi-award" style="font-size: 30px;color: #44b07e; background: #eff9f6; padding: 11px 13px; border-radius: 40px;"></i>
                     <h5>Elite</h5>
                     <p>ab 904</p>
                     <span class="d-inline" style="position: absolute; bottom: 18px;">
                         <div class="commission-value">€100.000</div>
-                        
                     </span>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="commission-card">
+                <div class="commission-card mb-3">
                     <i class="fa fa-file-text" style="font-size: 30px;color: #f7763b; background: #fbf3ec; padding: 14px; border-radius: 40px;"></i>
                     <h5>Expert</h5>
                     <p>ab 904</p>
@@ -102,61 +112,99 @@
             <table class="table align-middle">
                 <thead>
                     <tr>
-                        <td>Commission Level</th>
-                        <td>Potential Earning / Months</th>
-                        <td>Percent</th>
+                        <td><p><b>COMMISSION LEVEL</b></p></th>
+                        <td><p><b>POTENTIAL EARNING/MONTHS</b></p></th>
+                        <td><p><b>PERCENT</b></p></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>
                             <div class="row">
-                                <div class="col-2">
-                                    <div style="background: #baeada; color: #306855; margin-inline: 10px; padding: 9px; border-radius: 22px;"><b>5</b></div>
+                                <div class="col-6 col-md-2">
+                                    <div style="background: #baeada; color: #306855; padding: 9px; border-radius: 22px;"><b>1</b></div>
                                 </div>
-                                <div class="col-3 text-start">
+                                <div class="col-6 col-md-3 text-start">
                                     <p class="mb-0">Shrimp</p>
                                     <p class="mb-0">3-12</p>
                                 </div>
                             </div>
                         </td>
-                        <td><span class="text-success">(74,75€ - 999€)</span></td>
-                        <td></td>
+                        <td><span class="text-success" style="background: #baeada; color: #306855 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">(74,75€ - 999€)</span></td>
+                        <td><span class="text-success" style="background: #baeada; color: #306855 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">15%</span></td>
                     </tr>
                     <tr>
-                        <td>6 - Small Fish <br><small>14 to 30</small></td>
-                        <td><span class="text-danger">(1.000 - 2.499€)</span></td>
-                        <td></td>
+                        <td>
+                            <div class="row">
+                                <div class="col-6 col-md-2">
+                                    <div style="background: #ffd4de; color: #ad687c; padding: 9px; border-radius: 22px;"><b>2</b></div>
+                                </div>
+                                <div class="col-6 col-md-3 text-start">
+                                    <p class="mb-0">Small Fish</p>
+                                    <p class="mb-0">3-12</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="text-success" style="background: #ffd4de; color: #ad687c !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">(74,75€ - 999€)</span></td>
+                        <td><span class="text-success" style="background: #ffd4de; color: #ad687c !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">15%</span></td>
                     </tr>
                     <tr>
-                        <td>7 - Dolphin <br><small>31 to 111</small></td>
-                        <td><span class="text-warning">(54,65€ - 799€)</span></td>
-                        <td><div class="progress-circle" style="--percent:30; --clr:#ffc107;">30%</div></td>
+                        <td>
+                            <div class="row">
+                                <div class="col-6 col-md-2">
+                                    <div style="background: #ffded0; color: #a86860; padding: 9px; border-radius: 22px;"><b>4</b></div>
+                                </div>
+                                <div class="col-6 col-md-3 text-start">
+                                    <p class="mb-0">Dolphin</p>
+                                    <p class="mb-0">3-12</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="text-success" style="background: #ffded0; color: #a86860 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">(74,75€ - 999€)</span></td>
+                        <td><span class="text-success" style="background: #ffded0; color: #a86860 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">15%</span></td>
                     </tr>
                     <tr>
-                        <td>8 - Shark <br><small>2 to 13</small></td>
-                        <td><span class="text-primary">(54,65€ - 799€)</span></td>
-                        <td><div class="progress-circle" style="--percent:35; --clr:#0d6efd;">35%</div></td>
+                        <td>
+                            <div class="row">
+                                <div class="col-6 col-md-2">
+                                    <div style="background: #e6b3e5; color: #795b88; padding: 9px; border-radius: 22px;"><b>3</b></div>
+                                </div>
+                                <div class="col-6 col-md-3 text-start">
+                                    <p class="mb-0">Shark</p>
+                                    <p class="mb-0">3-12</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="text-success" style="background: #e6b3e5; color: #795b88 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">(74,75€ - 999€)</span></td>
+                        <td><span class="text-success" style="background: #e6b3e5; color: #795b88 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">15%</span></td>
                     </tr>
                     <tr>
-                        <td>9 - Shark <br><small>2 to 133333sdfghjkdfghjsdfgh</small></td>
-                        <td><span class="text-primary">(54,65€ - 799€)</span></td>
-                        <td><div class="progress-circle" style="--percent:35; --clr:#0d6efd;">35%</div></td>
-                    </tr>
-                    <tr>
-                        <td>10 - Blue Whale <br><small>2 to 13</small></td>
-                        <td><span class="text-success">(74,75€ - 999€)</span></td>
-                        <td><div class="progress-circle" style="--percent:40; --clr:#20c997;">40%</div></td>
+                        <td>
+                            <div class="row">
+                                <div class="col-6 col-md-2">
+                                    <div style="background: #baeada; color: #306855; padding: 9px; border-radius: 22px;"><b>5</b></div>
+                                </div>
+                                <div class="col-6 col-md-3 text-start">
+                                    <p class="mb-0">Shrimp</p>
+                                    <p class="mb-0">3-12</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="text-success" style="background: #baeada; color: #306855 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">(74,75€ - 999€)</span></td>
+                        <td><span class="text-success" style="background: #baeada; color: #306855 !important;  padding: 6px 15px; border-radius: 5px; font-size: 13px;">15%</span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
 
     </div>
 </section>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('js'); ?>
+
+
 <script src="<?php echo e(asset('public/user_dashboard/js/sweetalert/sweetalert-unpkg.min.js')); ?>"></script>
 <?php echo $__env->make('user_dashboard.layouts.common.check-user-status', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('common.user-transactions-scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
