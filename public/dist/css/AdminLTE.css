@@ -9,6 +9,7 @@
  * Core: General Layout Style
  * -------------------------
  */
+ @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
  @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,500&display=swap');
  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -695,6 +696,7 @@ a:focus {
 }
 
 .sidebar-menu > li > a > .fa,
+.sidebar-menu>li>a>.bi,
 .sidebar-menu > li > a > .glyphicon,
 .sidebar-menu > li > a > .ion {
         width: 40px;

@@ -295,26 +295,20 @@ class CustomerController extends Controller
 
     public function comissions()
     {
-        $data['menu']  = 'dashboard';
-        $data['title'] = 'Dashboard';
-
-        // $transaction          = new Transaction();
-        // $data['transactions'] = $transaction->dashboardTransactionList();
-        // $data['wallets'] = $wallets = Wallet::with('currency:id,type,logo,code,status')->where(['user_id' => Auth::user()->id])->orderBy('balance', 'ASC')->get(['id', 'currency_id', 'balance', 'is_default']);
-
+        $data['menu']  = 'comissions';
+        $data['title'] = 'Comissions';
         return view('user_dashboard.layouts.comissions', $data);
     }
+
     public function wallet()
     {
-        $data['menu']  = 'dashboard';
-        $data['title'] = 'Dashboard';
-        return view('user_dashboard.layouts.wallet', $data);
+    $data['menu']  = 'wallet';   
+    $data['title'] = 'Wallet';
+    return view('user_dashboard.layouts.wallet', $data);
     }
 
     public function profile()
-    {
-        
-       
+    {  
         $data['menu']     = 'profile';
         $data['sub_menu'] = 'profile';
         $data['user']     = $user     = User::find(Auth::user()->id);

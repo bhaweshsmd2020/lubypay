@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Image;
 
-class ComissionsController extends Controller
+class WalletController extends Controller
 {
     protected $helper;
     protected $twoFa;
@@ -57,20 +57,18 @@ class ComissionsController extends Controller
         return view('user_dashboard.layouts.dashboard', $data);
     }
 
-    public function comissions()
+    public function wallet()
     {
-        $data['menu']  = 'comissions';
-        $data['title'] = 'Comissions';
-        return view('user_dashboard.layouts.comissions', $data);
+        $data['menu']  = 'wallet';   
+        $data['title'] = 'Wallet';
+
+        $data['wallets'] = Wallet::with('currency:id,type,logo,code,status')
+            ->where('user_id', Auth::id())
+            ->orderBy('balance', 'ASC')
+            ->paginate(10, ['id', 'user_id', 'currency_id', 'balance', 'is_default', 'created_at']);
+
+        return view('user_dashboard.layouts.wallet', $data);
     }
-
-    
-
-
-
-
-
-
 
 
 

@@ -11,6 +11,7 @@
   font-weight: normal;
   font-style: normal;
 }
+.bi,
 .fa {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
@@ -41,6 +42,7 @@
   width: 1.28571429em;
   text-align: center;
 }
+.bi-ul,
 .fa-ul {
   padding-left: 0;
   margin-left: 2.14285714em;

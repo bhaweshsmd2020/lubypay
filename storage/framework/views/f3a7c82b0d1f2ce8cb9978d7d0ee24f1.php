@@ -6,6 +6,12 @@
     $persona_kyc = DB::table('kycdatastores')->where('user_id', auth()->user()->id)->where('status', 'COMPLETED')->first();
     $manual_kyc = DB::table('users')->where('id', auth()->user()->id)->where('photo_verified', '1')->where('address_verified', '1')->where('identity_verified', '1')->first();
 ?>
+<style>
+    a{
+        text-decoration: none;
+    }
+</style>
+
 
 <ul class="sidebar-menu">
     <li class="<?= isset($menu) && ($menu == 'dashboard') ? 'active' : '' ?>">
@@ -28,7 +34,15 @@
             <a href="<?php echo e(url('/transactions')); ?>"><i class="fa fa-file"></i><?php echo app('translator')->get('message.dashboard.nav-menu.transactions'); ?></a>
         </li>
     <?php endif; ?>
-        
+
+    <li class="<?php echo e(isset($menu) && $menu == 'wallet' ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('wallet')); ?>"> <i class="bi bi-wallet-fill" style="margin-right: 18px;"></i> Wallet </a>
+    </li>
+
+     <li class=" <?php echo e(isset($menu) && $menu == 'comissions' ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('comissions')); ?>"> <i class="bi bi-file-earmark-text" style="margin-right: 18px;"></i>  Commissions </a>
+    </li>
+    
     <?php if((empty($persona_kyc) && !empty($manual_kyc)) || (!empty($persona_kyc) && empty($manual_kyc)) || (!empty($persona_kyc) && !empty($manual_kyc))): ?>
         <?php if(auth()->user()->role_id == 2): ?>   
             <li class="<?= isset($menu) && ($menu == 'deposit') ? 'active' : '' ?>">

@@ -65,8 +65,9 @@ class UserTransactionController extends Controller
         $data['from'] = $from;
         $data['to']   = $to;
 
-        $data['transactions'] = $transaction->getTransactions($from, $to, $type, $wallet, $status);
-        
+        // $data['transactions'] = $transaction->getTransactions($from, $to, $type, $wallet, $status);
+            // $data['transactions'] = Transaction::latest()->take(20)->get();
+        $data['transactions'] = Transaction::latest()->paginate(20);
         $ids = [];
         
         $requested_for_withdrawal = SalesWithdrawal::where(['user_id' => Auth::user()->id])->get();
@@ -109,6 +110,8 @@ class UserTransactionController extends Controller
                     break;
             }
         }
+
+        // dd(Transaction::first()->toArray());
         return view('user_dashboard.transactions.index', $data);
     }
 

@@ -67,8 +67,8 @@ Route::group(['middleware' => ['guest:users', 'locale', 'twoFa', 'check-user-ina
 
 
     Route::get('dashboard', 'CustomerController@dashboard');
-    Route::get('comissions', 'CustomerController@comissions');
-    Route::get('wallet', 'CustomerController@wallet');
+    Route::get('wallet', 'WalletController@wallet')->name("wallet");
+    Route::get('comissions', 'ComissionsController@comissions')->name("comissions");
 
     
 
